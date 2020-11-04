@@ -3,6 +3,7 @@ import requests
 import xml.etree.ElementTree as ET
 from data_model.Hospital import Hospital
 
+
 def demo():
     service_url = 'http://apis.data.go.kr/B552657/HsptlAsembySearchService/getBabyLcinfoInqire'
     auth_key = '5jlnt%2BDn%2FmCMkk6r9m80%2F%2BxSNIB52nikP2Oo4iqUJ0eoLcJbIXAcRAAkSbrRACIOQ2IrxfGCmIuSGKMcDW4J2g%3D%3D'
@@ -43,20 +44,35 @@ def demo():
             # parse returned hospitals
             for item in body_element:
                 hospital = Hospital()
-                hospital.distance = item[1].text
-                hospital.address = item[2].text
-                hospital.level = item[3].text
-                hospital.facility = item[4].text
-                hospital.emergency_code = item[5].text
-                hospital.fax_number = item[6].text
-                hospital.status = item[7].text
-                hospital.name = item[8].text
-                hospital.contact = item[9].text
-                hospital.end_time = item[10].text
-                hospital.hospital_id = item[11].text
-                hospital.latitude = item[12].text
-                hospital.longitude = item[13].text
-                hospital.start_time = item[14].text
+                for information in item:
+                    if information.tag == "distance":
+                        hospital.distance = information.text
+                    elif information.tag == "dutyAddr":
+                        hospital.address = information.text
+                    elif information.tag == "dutyDiv":
+                        hospital.level = information.text
+                    elif information.tag == "dutyDivName":
+                        hospital.facility = information.text
+                    elif information.tag == "dutyEmcls":
+                        hospital.emergency_code = information.text
+                    elif information.tag == "dutyFax":
+                        hospital.fax_number = information.text
+                    elif information.tag == "dutyLvkl":
+                        hospital.status = information.text
+                    elif information.tag == "dutyName":
+                        hospital.name = information.text
+                    elif information.tag == "dutyTel1":
+                        hospital.contact = information.text
+                    elif information.tag == "endTime":
+                        hospital.end_time = information.text
+                    elif information.tag == "hpid":
+                        hospital.hospital_id = information.text
+                    elif information.tag == "latitude":
+                        hospital.latitude = information.text
+                    elif information.tag == "longitude":
+                        hospital.longitude = information.text
+                    elif information.tag == "startTime":
+                        hospital.start_time = information.text
                 hospital_list.append(hospital)
         elif body_element.tag == "numOfRows":
             num_or_rows = body_tree[1].text
