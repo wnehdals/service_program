@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify, render_template
+import hospital_demo
 import requests
 app = Flask(__name__)
 
@@ -20,9 +21,10 @@ def childeren():
 @app.route('/festival.html')
 def festival():
     return render_template('festival.html')
-@app.route('/hospital.html')
+@app.route('/hospital')
 def hospital():
-    return render_template('hospital.html')
+    # return render_template('hospital.html')
+    return hospital_demo.demo()
 
 
 if __name__ == '__main__':
