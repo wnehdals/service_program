@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify, render_template
 import requests
 import json
 import re
+
 app = Flask(__name__)
 
 
@@ -26,12 +27,10 @@ def childeren():
     return render_template('children.html')
 
 
-@app.route('/festival.html', methods=['POST','GET'])
-def festival():
-
+@app.route('/festival.html/<pageNum>')
+@app.route('/festival.html', methods=['POST', 'GET'])
+def festival(pageNum=1):
     host = 'http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList'
-
-
 
     params = {'ServiceKey': 'mjcDOZkT0XqWULC1L3PAFfxCere4Wq1oXpTJv6jmdF5RmBMPaN6A6Ju112m74zBmsXVsYDW7YJOCH40Q4nmDwg==',
               'contentTypeId': '15',
@@ -43,23 +42,17 @@ def festival():
               'numOfRows': '12',
               'pageNo': '1',
               '_type': 'json'}
+    params['pageNo'] = pageNum
 
-    url = 'http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?ServiceKey=mjcDOZkT0XqWULC1L3PAFfxCere4Wq1oXpTJv6jmdF5RmBMPaN6A6Ju112m74zBmsXVsYDW7YJOCH40Q4nmDwg==&contentTypeId=15&areaCode=31&sigunguCode=&cat1=&cat2=&cat3=&listYN=Y&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=A&numOfRows=12&pageNo=1&_type=json'
-    '''res = requests.get(host, params=params).json()
-    response = res['response']
-    body = response['body']
-    items = body['items']
-    item = items['item']
-    print(item)
-    '''
-
-    item = getItem(host, params)
-    imgList = getImgUrl(item)
-    titleList = getTitle(item)
-    contentIdList = getContentId(item)
-    overviewList = getOverView(contentIdList)
+    item = getFestivalItem(host, params)
+    imgList = getFestivalImgUrl(item)
+    titleList = getFestivalTitle(item)
+    contentIdList = getFestivalContentId(item)
+    overviewList = getFestivalOverView(contentIdList)
     return render_template('festival.html', imgList=imgList, titleList=titleList, overviewList=overviewList)
-def getOverView(contentIdList):
+
+
+def getFestivalOverView(contentIdList):
     host = 'http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon'
     query = {
         'ServiceKey': 'mjcDOZkT0XqWULC1L3PAFfxCere4Wq1oXpTJv6jmdF5RmBMPaN6A6Ju112m74zBmsXVsYDW7YJOCH40Q4nmDwg==',
@@ -75,21 +68,21 @@ def getOverView(contentIdList):
         'mapinfoYN': 'Y',
         'overviewYN': 'Y',
         'transGuideYN': 'N',
-        '_type' : 'json'
+        '_type': 'json'
 
     }
     list = []
 
     for i in contentIdList:
         query['contentId'] = i
-        item = getItem(host, query)
+        item = getFestivalItem(host, query)
         s = item['overview']
         s = re.sub('(<([^>]+)>)', '', s)
         list.append(s)
     return list
 
 
-def getItem(url, query):
+def getFestivalItem(url, query):
     res = requests.get(url, params=query).json()
     response = res['response']
     body = response['body']
@@ -98,28 +91,29 @@ def getItem(url, query):
     return item
 
 
-def getContentId(item):
+def getFestivalContentId(item):
     list = []
     for i in item:
         list.append(i['contentid'])
     return list
 
 
-def getImgUrl(item):
+def getFestivalImgUrl(item):
     list = []
     for i in item:
-        list.append(i['firstimage'])
+        if ('firstimage' in i):
+            list.append(i['firstimage'])
+        else:
+            list.append("http://placehold.it/700x300")
 
     return list
 
 
-def getTitle(item):
+def getFestivalTitle(item):
     list = []
     for i in item:
         list.append(i['title'])
     return list
-
-
 
 
 @app.route('/hospital.html')
