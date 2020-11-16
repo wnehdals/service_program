@@ -52,12 +52,15 @@ def getFestival(pageNum=1):
     titleList = getFestivalTitle(item)
     contentIdList = getFestivalContentId(item)
     overviewList = getFestivalOverView(contentIdList)
+    startList, endList = getFestivalDate(contentIdList)
     for i in range(12):
-        festival = dict(img="", title="", contentId="", overview="")
+        festival = dict(img="", title="", contentId="", overview="", startDate="", endDate="")
         festival['img'] = imgList[i]
         festival['title'] = titleList[i]
         festival['contentId'] = contentIdList[i]
         festival['overview'] = overviewList[i]
+        festival['startDate'] = startList[i]
+        festival['endDate'] = endList[i]
         list.append(festival)
     jsonVal = json.dumps(list, ensure_ascii=False, indent=4)
     return jsonVal
@@ -87,7 +90,35 @@ def festival(pageNum=1):
     #return render_template('festival.html', imgList=imgList, titleList=titleList, overviewList=overviewList)
     return render_template('festival.html')
 
+def getFestivalDate(contentIdList):
+    host = 'http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailIntro'
+    query = {
+        'ServiceKey': 'mjcDOZkT0XqWULC1L3PAFfxCere4Wq1oXpTJv6jmdF5RmBMPaN6A6Ju112m74zBmsXVsYDW7YJOCH40Q4nmDwg==',
+        'contentTypeId': '15',
+        'contentId': '2615383',
+        'MobileOS': 'ETC',
+        'MobileApp': 'soc_project',
+        'introYN': 'Y',
+        '_type': 'json'
+    }
+    startlist = []
+    endlist = []
+    for i in contentIdList:
+        query['contentId'] = i
+        item = getFestivalItem(host, query)
+        endDate = makeDate(str(item['eventenddate']))
 
+        startDate = makeDate(str(item['eventstartdate']))
+        startlist.append(startDate)
+        endlist.append(endDate)
+    return startlist, endlist
+
+def makeDate(date: str):
+    d = ''
+    d += (date[0:4] + '년 ')
+    d += (date[4:6] + '월 ')
+    d += (date[6:] + '일')
+    return d
 def getFestivalOverView(contentIdList):
     host = 'http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon'
     query = {
