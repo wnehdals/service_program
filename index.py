@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify, render_template
+import hospital_demo
 import requests
 import json
 import re
@@ -25,7 +26,6 @@ def service():
 @app.route('/children.html')
 def childeren():
     return render_template('children.html')
-
 
 @app.route('/festival.html/<pageNum>')
 @app.route('/festival.html', methods=['POST', 'GET'])
@@ -116,9 +116,10 @@ def getFestivalTitle(item):
     return list
 
 
-@app.route('/hospital.html')
+@app.route('/hospital')
 def hospital():
-    return render_template('hospital.html')
+    # return render_template('hospital.html')
+    return hospital_demo.demo()
 
 
 if __name__ == '__main__':
