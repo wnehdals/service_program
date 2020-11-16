@@ -26,10 +26,13 @@ def service():
 @app.route('/children.html')
 def childeren():
     return render_template('children.html')
+@app.errorhandler(404)
+def not_found(error):
 
-@app.route('/festival.html/<pageNum>')
-@app.route('/festival.html', methods=['POST', 'GET'])
-def festival(pageNum=1):
+    return render_template('404.html')
+@app.route('/festival')
+@app.route('/festival/<pageNum>')
+def getFestival(pageNum=1):
     host = 'http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList'
 
     params = {'ServiceKey': 'mjcDOZkT0XqWULC1L3PAFfxCere4Wq1oXpTJv6jmdF5RmBMPaN6A6Ju112m74zBmsXVsYDW7YJOCH40Q4nmDwg==',
@@ -43,15 +46,79 @@ def festival(pageNum=1):
               'pageNo': '1',
               '_type': 'json'}
     params['pageNo'] = pageNum
-
+    list = []
     item = getFestivalItem(host, params)
     imgList = getFestivalImgUrl(item)
     titleList = getFestivalTitle(item)
     contentIdList = getFestivalContentId(item)
     overviewList = getFestivalOverView(contentIdList)
-    return render_template('festival.html', imgList=imgList, titleList=titleList, overviewList=overviewList)
+    startList, endList = getFestivalDate(contentIdList)
+    for i in range(12):
+        festival = dict(img="", title="", contentId="", overview="", startDate="", endDate="")
+        festival['img'] = imgList[i]
+        festival['title'] = titleList[i]
+        festival['contentId'] = contentIdList[i]
+        festival['overview'] = overviewList[i]
+        festival['startDate'] = startList[i]
+        festival['endDate'] = endList[i]
+        list.append(festival)
+    jsonVal = json.dumps(list, ensure_ascii=False, indent=4)
+    return jsonVal
+@app.route('/festival.html/<pageNum>')
+@app.route('/festival.html', methods=['GET'])
+def festival(pageNum=1):
+    '''
+    host = 'http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList'
 
+    params = {'ServiceKey': 'mjcDOZkT0XqWULC1L3PAFfxCere4Wq1oXpTJv6jmdF5RmBMPaN6A6Ju112m74zBmsXVsYDW7YJOCH40Q4nmDwg==',
+              'contentTypeId': '15',
+              'areaCode': '31',
+              'listYN': 'Y',
+              'MobileOS': 'ETC',
+              'MobileApp': 'TourAPI3.0_Guide',
+              'arrange': 'A',
+              'numOfRows': '12',
+              'pageNo': '1',
+              '_type': 'json'}
+    params['pageNo'] = pageNum
+    item = getFestivalItem(host, params)
+    imgList = getFestivalImgUrl(item)
+    titleList = getFestivalTitle(item)
+    contentIdList = getFestivalContentId(item)
+    overviewList = getFestivalOverView(contentIdList)
+    '''
+    #return render_template('festival.html', imgList=imgList, titleList=titleList, overviewList=overviewList)
+    return render_template('festival.html')
 
+def getFestivalDate(contentIdList):
+    host = 'http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailIntro'
+    query = {
+        'ServiceKey': 'mjcDOZkT0XqWULC1L3PAFfxCere4Wq1oXpTJv6jmdF5RmBMPaN6A6Ju112m74zBmsXVsYDW7YJOCH40Q4nmDwg==',
+        'contentTypeId': '15',
+        'contentId': '2615383',
+        'MobileOS': 'ETC',
+        'MobileApp': 'soc_project',
+        'introYN': 'Y',
+        '_type': 'json'
+    }
+    startlist = []
+    endlist = []
+    for i in contentIdList:
+        query['contentId'] = i
+        item = getFestivalItem(host, query)
+        endDate = makeDate(str(item['eventenddate']))
+
+        startDate = makeDate(str(item['eventstartdate']))
+        startlist.append(startDate)
+        endlist.append(endDate)
+    return startlist, endlist
+
+def makeDate(date: str):
+    d = ''
+    d += (date[0:4] + '년 ')
+    d += (date[4:6] + '월 ')
+    d += (date[6:] + '일')
+    return d
 def getFestivalOverView(contentIdList):
     host = 'http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon'
     query = {
