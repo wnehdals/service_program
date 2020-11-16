@@ -32,9 +32,7 @@ def not_found(error):
     return render_template('404.html')
 @app.route('/festival')
 @app.route('/festival/<pageNum>')
-@app.route('/festival.html/<pageNum>')
-@app.route('/festival.html', methods=['GET'])
-def festival(pageNum=1):
+def getFestival(pageNum=1):
     host = 'http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList'
 
     params = {'ServiceKey': 'mjcDOZkT0XqWULC1L3PAFfxCere4Wq1oXpTJv6jmdF5RmBMPaN6A6Ju112m74zBmsXVsYDW7YJOCH40Q4nmDwg==',
@@ -49,22 +47,45 @@ def festival(pageNum=1):
               '_type': 'json'}
     params['pageNo'] = pageNum
     list = []
-
     item = getFestivalItem(host, params)
     imgList = getFestivalImgUrl(item)
     titleList = getFestivalTitle(item)
     contentIdList = getFestivalContentId(item)
     overviewList = getFestivalOverView(contentIdList)
     for i in range(12):
-        festival = dict(img = "", title = "", contentId = "", overview = "")
+        festival = dict(img="", title="", contentId="", overview="")
         festival['img'] = imgList[i]
         festival['title'] = titleList[i]
         festival['contentId'] = contentIdList[i]
         festival['overview'] = overviewList[i]
         list.append(festival)
-    jsonVal = json.dumps(list,ensure_ascii=False,indent=4)
+    jsonVal = json.dumps(list, ensure_ascii=False, indent=4)
     return jsonVal
+@app.route('/festival.html/<pageNum>')
+@app.route('/festival.html', methods=['GET'])
+def festival(pageNum=1):
+    '''
+    host = 'http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList'
+
+    params = {'ServiceKey': 'mjcDOZkT0XqWULC1L3PAFfxCere4Wq1oXpTJv6jmdF5RmBMPaN6A6Ju112m74zBmsXVsYDW7YJOCH40Q4nmDwg==',
+              'contentTypeId': '15',
+              'areaCode': '31',
+              'listYN': 'Y',
+              'MobileOS': 'ETC',
+              'MobileApp': 'TourAPI3.0_Guide',
+              'arrange': 'A',
+              'numOfRows': '12',
+              'pageNo': '1',
+              '_type': 'json'}
+    params['pageNo'] = pageNum
+    item = getFestivalItem(host, params)
+    imgList = getFestivalImgUrl(item)
+    titleList = getFestivalTitle(item)
+    contentIdList = getFestivalContentId(item)
+    overviewList = getFestivalOverView(contentIdList)
+    '''
     #return render_template('festival.html', imgList=imgList, titleList=titleList, overviewList=overviewList)
+    return render_template('festival.html')
 
 
 def getFestivalOverView(contentIdList):
