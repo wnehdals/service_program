@@ -26,9 +26,14 @@ def service():
 @app.route('/children.html')
 def childeren():
     return render_template('children.html')
+@app.errorhandler(404)
+def not_found(error):
 
+    return render_template('404.html')
+@app.route('/festival')
+@app.route('/festival/<pageNum>')
 @app.route('/festival.html/<pageNum>')
-@app.route('/festival.html', methods=['POST', 'GET'])
+@app.route('/festival.html', methods=['GET'])
 def festival(pageNum=1):
     host = 'http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList'
 
@@ -43,13 +48,23 @@ def festival(pageNum=1):
               'pageNo': '1',
               '_type': 'json'}
     params['pageNo'] = pageNum
+    list = []
 
     item = getFestivalItem(host, params)
     imgList = getFestivalImgUrl(item)
     titleList = getFestivalTitle(item)
     contentIdList = getFestivalContentId(item)
     overviewList = getFestivalOverView(contentIdList)
-    return render_template('festival.html', imgList=imgList, titleList=titleList, overviewList=overviewList)
+    for i in range(12):
+        festival = dict(img = "", title = "", contentId = "", overview = "")
+        festival['img'] = imgList[i]
+        festival['title'] = titleList[i]
+        festival['contentId'] = contentIdList[i]
+        festival['overview'] = overviewList[i]
+        list.append(festival)
+    jsonVal = json.dumps(list,ensure_ascii=False,indent=4)
+    return jsonVal
+    #return render_template('festival.html', imgList=imgList, titleList=titleList, overviewList=overviewList)
 
 
 def getFestivalOverView(contentIdList):
