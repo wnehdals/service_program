@@ -4,14 +4,14 @@ import xml.etree.ElementTree as ET
 from data_model.Hospital import Hospital
 
 
-def demo():
+def request(longitude, latitude):
     service_url = 'http://apis.data.go.kr/B552657/HsptlAsembySearchService/getBabyLcinfoInqire'
     auth_key = '5jlnt%2BDn%2FmCMkk6r9m80%2F%2BxSNIB52nikP2Oo4iqUJ0eoLcJbIXAcRAAkSbrRACIOQ2IrxfGCmIuSGKMcDW4J2g%3D%3D'
     query_params = {"serviceKey": auth_key,
                     "pageNo": 1,
                     "numOfRows": 10,
-                    "WGS84_LON": 127.0851566,
-                    "WGS84_LAT": 37.48813256
+                    "WGS84_LON": longitude,
+                    "WGS84_LAT": latitude
                     }
 
     params_url = "?"
@@ -22,6 +22,12 @@ def demo():
 
     request_url = service_url + params_url
     api_request = requests.get(request_url)
+
+    return api_request
+
+
+def demo():
+    api_request = request(127.0851566, 37.48813256)
 
     # print(api_request.url)
     # print(api_request.text)
@@ -82,3 +88,5 @@ def demo():
     print("END OF DEMO")
 
     return render_template("hospital.html", item_count=len(hospital_list), items=hospital_list)
+
+
