@@ -19,6 +19,9 @@ def getFestival(pageNum=1):
               '_type': 'json'}
     params['pageNo'] = pageNum
     list = []
+    #parser = reqparse.RequestParser()
+    #parser.add_argument('pageNum', required=true, type=string)
+    #arg = parser.parse_args()
     item = getFestivalItem(host, params)
     imgList = getFestivalImgUrl(item)
     titleList = getFestivalTitle(item)

@@ -83,107 +83,239 @@
     </div>
 </header>
 
- <!-- Page Content -->
-  <div class="container">
+<!-- Page Content -->
+<div class="container">
 
     <h2 class="my-4">저희 API가 사용하는 세부 API들입니다.</h2>
 
     <!-- Marketing Icons Section -->
     <div class="row">
-      <div class="col-lg-4 mb-4">
-        <div class="card h-100">
-          <h4 class="card-header">유치원 조회</h4>
-          <div class="card-body">
-            <p class="card-text">경기도 내 어린이 유치원의 위치를 보여줍니다.</p>
-          </div>
-          <div class="card-footer">
-            <a href="children.html" class="btn btn-primary">확인해보기</a>
-          </div>
+        <div class="col-lg-4 mb-4">
+            <div class="card h-100">
+                <h4 class="card-header">유치원 조회</h4>
+                <div class="card-body">
+                    <p class="card-text">경기도 내 어린이 유치원의 위치를 보여줍니다.</p>
+                </div>
+                <div class="card-footer">
+                    <a href="children.html" class="btn btn-primary">확인해보기</a>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="col-lg-4 mb-4">
-        <div class="card h-100">
-          <h4 class="card-header">축제/행사/관광지</h4>
-          <div class="card-body">
-            <p class="card-text">경기도에서 열리는 다양한 축제, 행사, 관광지 정보를 알려줍니다.</p>
-          </div>
-          <div class="card-footer">
-            <a href="festival.html" class="btn btn-primary">확인해보기</a>
-          </div>
+        <div class="col-lg-4 mb-4">
+            <div class="card h-100">
+                <h4 class="card-header">축제/행사/관광지</h4>
+                <div class="card-body">
+                    <p class="card-text">경기도에서 열리는 다양한 축제, 행사, 관광지 정보를 알려줍니다.</p>
+                </div>
+                <div class="card-footer">
+                    <a href="festival.html" class="btn btn-primary">확인해보기</a>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="col-lg-4 mb-4">
-        <div class="card h-100">
-          <h4 class="card-header">병원</h4>
-          <div class="card-body">
-            <p class="card-text">현재 위치를 기반으로 한 주변 달빛어린이병원, 소아전문센터의 위치를 알려줍니다.</p>
-          </div>
-          <div class="card-footer">
-            <a href="hospital" class="btn btn-primary">확인해보기</a>
-          </div>
+        <div class="col-lg-4 mb-4">
+            <div class="card h-100">
+                <h4 class="card-header">병원</h4>
+                <div class="card-body">
+                    <p class="card-text">현재 위치를 기반으로 한 주변 달빛어린이병원, 소아전문센터의 위치를 알려줍니다.</p>
+                </div>
+                <div class="card-footer">
+                    <a href="hospital" class="btn btn-primary">확인해보기</a>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
     <!-- /.row -->
 
 
     <h2 class="my-4">API를 사용하기 위한 명세서를 아래에서 확인할 수 있습니다.</h2>
-
     <div class="row">
-      <div class="col-lg-12 my-4">
-        <h4>요청 헤더 리스트</h4>
-        <table class="table">
-          <thead class="thead-light">
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">헤더 이름</th>
-            <th scope="col">예시</th>
-            <th scope="col">설명</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>위도</td>
-            <td>37.48813256</td>
-            <td>현재 위치 주변에서 소아병원을 탐색하기 위함입니다.</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>경도</td>
-            <td>127.0851566</td>
-            <td>현재 위치 주변에서 소아병원을 탐색하기 위함입니다.</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>...</td>
-            <td>...</td>
-            <td>...</td>
-          </tr>
-          </tbody>
-        </table>
-        <h4>응답 형식</h4>
+        <div class="col-lg-12 my-4">
+            <h4>유치원</h4>
+            <table class="table">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">헤더 이름</th>
+                    <th scope="col">예시</th>
+                    <th scope="col">설명</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>위도</td>
+                    <td>37.48813256</td>
+                    <td>현재 위치 주변에서 소아병원을 탐색하기 위함입니다.</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>경도</td>
+                    <td>127.0851566</td>
+                    <td>현재 위치 주변에서 소아병원을 탐색하기 위함입니다.</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>...</td>
+                    <td>...</td>
+                    <td>...</td>
+                </tr>
+                </tbody>
+            </table>
+            <h4>응답 형식</h4>
 
-        <button class="btn btn-primary btn-block">API 모의 요청 및 결과 확인</button>
-      </div>
+            <button class="btn btn-primary btn-block">API 모의 요청 및 결과 확인</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 my-4">
+            <h4>축제/행사</h4>
+            <ht>http://127.0.0.1:5000/festival/{pageNum}</ht>
+            <h5>요청 변수</h5>
+            <table class="table">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">항목명</th>
+                    <th scope="col">항목구분</th>
+                    <th scope="col">항목설명</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>pageNum</td>
+                    <td>필수</td>
+                    <td>페이지 번호</td>
+                </tr>
+                </tbody>
+            </table>
+            <h4>응답 형식</h4>
+            <table class="table">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">항목명</th>
+                    <th scope="col">항목구분</th>
+                    <th scope="col">항목설명</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>title</td>
+                    <td>필수</td>
+                    <td>축제/행사 이름</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>img</td>
+                    <td>필수</td>
+                    <td>대표사진</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>contentId</td>
+                    <td>필수</td>
+                    <td>id</td>
+                </tr>
+                <tr>
+                    <th scope="row">4</th>
+                    <td>overview</td>
+                    <td>필수</td>
+                    <td>축제/행사 내용</td>
+                </tr>
+                <tr>
+                    <th scope="row">5</th>
+                    <td>startDate</td>
+                    <td>필수</td>
+                    <td>축제/행사 시작일</td>
+                </tr>
+                <tr>
+                    <th scope="row">6</th>
+                    <td>endDate</td>
+                    <td>필수</td>
+                    <td>축제/행사 마감일</td>
+                </tr>
+                </tbody>
+            </table>
+            <form class="form-inline" role="form">
+                <input type="text" id="festival_input" class="form-control" placeholder="pageNum">
+            </form>
+            <textarea id="festival_output" cols="100" rows="10"></textarea>
+            <button class="btn btn-primary btn-block" onclick="getFestivalInfo()">API 모의 요청 및 결과 확인</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 my-4">
+            <h4>병원</h4>
+            <table class="table">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">헤더 이름</th>
+                    <th scope="col">예시</th>
+                    <th scope="col">설명</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>위도</td>
+                    <td>37.48813256</td>
+                    <td>현재 위치 주변에서 소아병원을 탐색하기 위함입니다.</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>경도</td>
+                    <td>127.0851566</td>
+                    <td>현재 위치 주변에서 소아병원을 탐색하기 위함입니다.</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>...</td>
+                    <td>...</td>
+                    <td>...</td>
+                </tr>
+                </tbody>
+            </table>
+            <h4>응답 형식</h4>
+
+            <button class="btn btn-primary btn-block">API 모의 요청 및 결과 확인</button>
+        </div>
     </div>
 
 
+</div>
+<!-- /.container -->
 
-  </div>
-  <!-- /.container -->
-
-  <!-- Footer -->
-  <footer class="py-5 bg-dark">
+<!-- Footer -->
+<footer class="py-5 bg-dark">
     <div class="container">
-      <p class="m-0 text-center text-white">Copyright &copy; Team Five 2020</p>
+        <p class="m-0 text-center text-white">Copyright &copy; Team Five 2020</p>
     </div>
     <!-- /.container -->
-  </footer>
+</footer>
 
-  <!-- Bootstrap core JavaScript -->
-  <script src="https:ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script type="text/javascript" src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script src="https:ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script type="text/javascript" src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    var festivlPageNum = 1;
+
+    function getFestivalInfo() {
+        festivlPageNum = document.getElementById('festival_input').value;
+        console.log(festivlPageNum)
+        var url = 'http://127.0.0.1:5000/festival/' + String(festivlPageNum)
+        console.log(url)
+        fetch(url)
+            .then(response => response.text())
+            .then((data) => {
+                    document.getElementById('festival_output').value = data
+                    console.log(data)
+            })
+
+    }
+</script>
 
 </body>
 
