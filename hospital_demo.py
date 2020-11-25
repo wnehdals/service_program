@@ -107,46 +107,46 @@ def response_hospital_info(longitude, latitude):
     body_tree = response_raw_tree.find("body")
     if body_tree is None:
         response_dict.update({"status": False})
+    else:
+        hospital_list = []
+        items_tree = body_tree.find("items")
+        if items_tree is not None:
+            for item in items_tree:
+                hospital = {}
 
-    hospital_list = []
-    items_tree = body_tree.find("items")
-    if items_tree is not None:
-        for item in items_tree:
-            hospital = {}
+                for information in item:
+                    if information.tag == "distance":
+                        hospital["distance"] = information.text
+                    elif information.tag == "dutyAddr":
+                        hospital["address"] = information.text
+                    elif information.tag == "dutyDiv":
+                        hospital["level"] = information.text
+                    elif information.tag == "dutyDivName":
+                        hospital["facility"] = information.text
+                    elif information.tag == "dutyEmcls":
+                        hospital["emergency_code"] = information.text
+                    elif information.tag == "dutyFax":
+                        hospital["fax_number"] = information.text
+                    elif information.tag == "dutyLvkl":
+                        hospital["status"] = information.text
+                    elif information.tag == "dutyName":
+                        hospital["name"] = information.text
+                    elif information.tag == "dutyTel1":
+                        hospital["contact"] = information.text
+                    elif information.tag == "endTime":
+                        hospital["end_time"] = information.text
+                    elif information.tag == "hpid":
+                        hospital["hospital_id"] = information.text
+                    elif information.tag == "latitude":
+                        hospital["latitude"] = information.text
+                    elif information.tag == "longitude":
+                        hospital["longitude"] = information.text
+                    elif information.tag == "startTime":
+                        hospital["start_time"] = information.text
 
-            for information in item:
-                if information.tag == "distance":
-                    hospital["distance"] = information.text
-                elif information.tag == "dutyAddr":
-                    hospital["address"] = information.text
-                elif information.tag == "dutyDiv":
-                    hospital["level"] = information.text
-                elif information.tag == "dutyDivName":
-                    hospital["facility"] = information.text
-                elif information.tag == "dutyEmcls":
-                    hospital["emergency_code"] = information.text
-                elif information.tag == "dutyFax":
-                    hospital["fax_number"] = information.text
-                elif information.tag == "dutyLvkl":
-                    hospital["status"] = information.text
-                elif information.tag == "dutyName":
-                    hospital["name"] = information.text
-                elif information.tag == "dutyTel1":
-                    hospital["contact"] = information.text
-                elif information.tag == "endTime":
-                    hospital["end_time"] = information.text
-                elif information.tag == "hpid":
-                    hospital["hospital_id"] = information.text
-                elif information.tag == "latitude":
-                    hospital["latitude"] = information.text
-                elif information.tag == "longitude":
-                    hospital["longitude"] = information.text
-                elif information.tag == "startTime":
-                    hospital["start_time"] = information.text
+                hospital_list.append(hospital)
 
-            hospital_list.append(hospital)
-
-        response_dict.update({"hospital_list": hospital_list})
+            response_dict.update({"hospital_list": hospital_list})
 
     json_response = json.dumps(response_dict, ensure_ascii=False, indent=4)
     return json_response
