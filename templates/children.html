@@ -72,7 +72,7 @@
     <div class="row">
       <div class="col-md-5">
         <h3 id="title_0"></h3>
-        <p id="overview_0"></p><p id="telNo_0"></p>
+        <p id="overview_0"></p><p id="childNo_0"></p><p class="text-primary" id="telNo_0"></p>
         <a href="#" id="hpAddr_0">site
           <span class="glyphicon glyphicon-chevron-right"></span>
         </a>
@@ -87,7 +87,7 @@
     <div class="row">
       <div class="col-md-5">
         <h3 id="title_1"></h3>
-        <p id="overview_1"></p><p id="telNo_1"></p>
+        <p id="overview_1"></p><p id="childNo_1"></p><p class="text-primary" id="telNo_1"></p>
         <a href="#" id="hpAddr_1">site
           <span class="glyphicon glyphicon-chevron-right"></span>
         </a>
@@ -101,7 +101,7 @@
     <div class="row">
       <div class="col-md-5">
         <h3 id="title_2"></h3>
-        <p id="overview_2"></p><p id="telNo_2"></p>
+        <p id="overview_2"></p><p id="childNo_2"></p><p class="text-primary" id="telNo_2"></p>
         <a href="#" id="hpAddr_2">site
           <span class="glyphicon glyphicon-chevron-right"></span>
         </a>
@@ -115,7 +115,7 @@
     <div class="row">
       <div class="col-md-5">
         <h3 id="title_3"></h3>
-        <p id="overview_3"></p><p id="telNo_3"></p>
+        <p id="overview_3"></p><p id="childNo_3"></p><p class="text-primary" id="telNo_3"></p>
         <a href="#" id="hpAddr_3">site
           <span class="glyphicon glyphicon-chevron-right"></span>
         </a>
@@ -129,7 +129,7 @@
     <div class="row">
       <div class="col-md-5">
         <h3 id="title_4"></h3>
-        <p id="overview_4"></p><p id="telNo_4"></p>
+        <p id="overview_4"></p><p id="childNo_4"></p><p class="text-primary" id="telNo_4"></p>
         <a href="#" id="hpAddr_4">site
           <span class="glyphicon glyphicon-chevron-right"></span>
         </a>
@@ -143,7 +143,7 @@
     <div class="row">
       <div class="col-md-5">
         <h3 id="title_5"></h3>
-        <p id="overview_5"></p><p id="telNo_5"></p>
+        <p id="overview_5"></p><p id="childNo_5"></p><p class="text-primary" id="telNo_5"></p>
         <a href="#" id="hpAddr_5">site
           <span class="glyphicon glyphicon-chevron-right"></span>
         </a>
@@ -157,7 +157,7 @@
     <div class="row">
       <div class="col-md-5">
         <h3 id="title_6"></h3>
-        <p id="overview_6"></p><p id="telNo_6"></p>
+        <p id="overview_6"></p><p id="childNo_6"></p><p class="text-primary" id="telNo_6"></p>
         <a href="#" id="hpAddr_6">site
           <span class="glyphicon glyphicon-chevron-right"></span>
         </a>
@@ -171,7 +171,7 @@
     <div class="row">
       <div class="col-md-5">
         <h3 id="title_7"></h3>
-        <p id="overview_7"></p><p id="telNo_7"></p>
+        <p id="overview_7"></p><p id="childNo_7"></p><p class="text-primary" id="telNo_7"></p>
         <a href="#" id="hpAddr_7">site
           <span class="glyphicon glyphicon-chevron-right"></span>
         </a>
@@ -185,7 +185,7 @@
     <div class="row">
       <div class="col-md-5">
         <h3 id="title_8"></h3>
-        <p id="overview_8"></p><p id="telNo_8"></p>
+        <p id="overview_8"></p><p id="childNo_8"></p><p class="text-primary" id="telNo_8"></p>
         <a href="#" id="hpAddr_8">site
           <span class="glyphicon glyphicon-chevron-right"></span>
         </a>
@@ -199,7 +199,7 @@
     <div class="row">
       <div class="col-md-5">
         <h3 id="title_9"></h3>
-        <p id="overview_9"></p><p id="telNo_9"></p>
+        <p id="overview_9"></p><p id="childNo_9"></p><p class="text-primary" id="telNo_9"></p>
         <a href="#" id="hpAddr_9">site
           <span class="glyphicon glyphicon-chevron-right"></span>
         </a>
@@ -213,7 +213,7 @@
     <div class="row">
       <div class="col-md-5">
         <h3 id="title_10"></h3>
-        <p id="overview_10"></p><p id="telNo_10"></p>
+        <p id="overview_10"></p><p id="childNo_10"></p><p class="text-primary" id="telNo_10"></p>
         <a href="#" id="hpAddr_10">site
           <span class="glyphicon glyphicon-chevron-right"></span>
         </a>
@@ -296,10 +296,13 @@
                     var titleId = 'title_' + String(i)
                     var overviewId = 'overview_' + String(i)
                     var telId = 'telNo_' + String(i)
+                    var childId = 'childNo_' + String(i)
                     var hpId = 'hpAddr_' + String(i)
+
                     document.getElementById(titleId).innerHTML = data[i].title
                     document.getElementById(overviewId).innerHTML = data[i].overview
                     document.getElementById(telId).innerHTML = data[i].telNo
+                    document.getElementById(childId).innerHTML = '총 유아수: ' + data[i].childNo
                     if(data[i].hpAddr!=null) {
                         document.getElementById(hpId).innerHTML = '<a class="btn btn-primary" href=" ' + data[i].hpAddr + ' " >site\n' +
                         '          <span class="glyphicon glyphicon-chevron-right"></span>\n' +
