@@ -4,6 +4,8 @@ import requests
 import json
 import re
 import festivalInfo
+import kinderInfo
+
 app = Flask(__name__)
 
 
@@ -23,9 +25,17 @@ def service():
     return render_template('services.html')
 
 
-@app.route('/children.html')
-def childeren():
-    return render_template('children.html')
+
+@app.route('/children')
+@app.route('/children/<pageNum>', methods=['GET'])
+def getChildren(pageNum=1):
+    return kinderInfo.getChildren(pageNum)
+
+@app.route('/children.html/<pageNum>')
+@app.route('/children.html', methods=['GET'])
+def children(pageNum=1):
+    return kinderInfo.info()
+
 @app.errorhandler(404)
 def not_found(error):
 

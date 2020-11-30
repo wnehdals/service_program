@@ -131,53 +131,88 @@
     <div class="row">
         <div class="col-lg-12 my-4">
             <h3>유치원</h3>
-            <h4>요청 형식</h4>
+            <h5>요청 변수</h5>
             <table class="table">
                 <thead class="thead-light">
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">헤더 이름</th>
-                    <th scope="col">예시</th>
-                    <th scope="col">설명</th>
+                    <th scope="col">항목명</th>
+                    <th scope="col">항목구분</th>
+                    <th scope="col">항목설명</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
                     <th scope="row">1</th>
-                    <td>...</td>
-                    <td>...</td>
-                    <td>...</td>
+                    <td>pageNum</td>
+                    <td>필수</td>
+                    <td>페이지 번호</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>sggCode</td>
+                    <td>선택</td>
+                    <td>시군구 코드</td>
                 </tr>
                 </tbody>
             </table>
-            <h4>응답 형식</h4>
+            <h5>응답 형식</h5>
             <table class="table">
                 <thead class="thead-light">
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">헤더 이름</th>
-                    <th scope="col">예시</th>
-                    <th scope="col">설명</th>
+                    <th scope="col">항목명</th>
+                    <th scope="col">항목구분</th>
+                    <th scope="col">항목설명</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
                     <th scope="row">1</th>
-                    <td>...</td>
-                    <td>...</td>
-                    <td>...</td>
+                    <td>title</td>
+                    <td>필수</td>
+                    <td>유치원 이름</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>overview</td>
+                    <td>필수</td>
+                    <td>유치원 주소</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>telNo</td>
+                    <td>필수</td>
+                    <td>연락처</td>
+                </tr>
+                <tr>
+                    <th scope="row">4</th>
+                    <td>hpAddr</td>
+                    <td>선택</td>
+                    <td>홈페이지 주소</td>
+                </tr>
+                <tr>
+                    <th scope="row">5</th>
+                    <td>childNo</td>
+                    <td>필수</td>
+                    <td>총 유아 수</td>
                 </tr>
                 </tbody>
             </table>
             <form role="form">
                 <div class="form-group">
-                    <label for="festival_input">입력 폼의 이름</label>
-                    <input type="text" id="???" class="form-control" placeholder="1">
-                    <small class="form-text form-muted">입력 폼에 대한 간단한 설명.</small>
+                    <label for="festival_input">페이지 번호</label>
+                    <input type="text" id="children_input1" class="form-control" placeholder="pageNum">
+                    <small class="form-text form-muted">유치원의 페이지 번호를 입력해주세요.</small>
                 </div>
                 <div class="form-group">
-                    <textarea id="????????" class="form-control" rows="10" readonly="true"></textarea>
-                    <button class="btn btn-primary btn-block" type="button" onclick="alert('Implement Here!');">API 모의 요청 및 결과 확인</button>
+                    <label for="festival_input">시군구 코드</label>
+                    <input type="text" id="children_input2" class="form-control" placeholder="sggCode">
+                    <small class="form-text form-muted">유치원의 시군구 코드를 입력해주세요.</small>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control" id="children_output" rows="10" readonly="true"></textarea>
+                    <button class="btn btn-primary btn-block" type="button" onclick="getChildrenInfo()">API 모의 요청 및 결과 확인</button>
                 </div>
             </form>
         </div>
@@ -481,7 +516,7 @@
 <script type="text/javascript" src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript">
     function getFestivalInfo() {
-        festivalPageNum = document.getElementById('festival_input').value;
+        festivalPageNum = document.getElementById('festival_input').value
         if(festivalPageNum == "") festivalPageNum = 1
         console.log(festivalPageNum)
         var url = 'http://127.0.0.1:5000/festival/' + String(festivalPageNum)
@@ -507,6 +542,22 @@
             document.getElementById('hospital_output').value = data
             console.log("job done")
         })
+
+
+    }
+
+    function getChildrenInfo() {
+        childrenPageNum = document.getElementById('children_input1').value
+        console.log(childrenPageNum)
+        var url = 'http://127.0.0.1:5000/children/' + String(childrenPageNum)
+        console.log(url)
+        fetch(url)
+            .then(response => response.text())
+            .then((data) => {
+                    document.getElementById('children_output').value = data
+                    console.log(data)
+            })
+
     }
 </script>
 
