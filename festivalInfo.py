@@ -4,12 +4,45 @@ import requests
 import json
 import re
 
-def getFestival(pageNum=1):
+def getFestival(pageNum=1,city=''):
     host = 'http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList'
-
+    cityDic = {
+        '가평군' : '1',
+        '고양시' : '2',
+        '과천시' : '3',
+        '광명시' : '4',
+        '광주시' : '5',
+        '구리시' : '6',
+        '군포시' : '7',
+        '김포시' : '8',
+        '남양주시' : '9',
+        '동두천시' : '10',
+        '부천시' : '11',
+        '성남시' : '12',
+        '수원시' : '13',
+        '시흥시' : '14',
+        '안산시' : '15',
+        '안성시' : '16',
+        '안양시' : '17',
+        '양주시' : '18',
+        '양평군' : '19',
+        '여주시' : '20',
+        '연천군' : '21',
+        '오산시' : '22',
+        '용인시' : '23',
+        '의왕시' : '24',
+        '의정부시' : '25',
+        '이천시' : '26',
+        '파주시' : '27',
+        '평택시' : '28',
+        '포천시' : '29',
+        '하남시' : '30',
+        '화성시' : '31'
+    }
     params = {'ServiceKey': 'mjcDOZkT0XqWULC1L3PAFfxCere4Wq1oXpTJv6jmdF5RmBMPaN6A6Ju112m74zBmsXVsYDW7YJOCH40Q4nmDwg==',
               'contentTypeId': '15',
               'areaCode': '31',
+              'sigunguCode' : '1',
               'listYN': 'Y',
               'MobileOS': 'ETC',
               'MobileApp': 'TourAPI3.0_Guide',
@@ -18,24 +51,30 @@ def getFestival(pageNum=1):
               'pageNo': '1',
               '_type': 'json'}
     params['pageNo'] = pageNum
+    if(city == ""):
+        params['sigunguCode'] = city
+    else:
+        params['sigunguCode'] = city
     list = []
     #parser = reqparse.RequestParser()
     #parser.add_argument('pageNum', required=true, type=string)
     #arg = parser.parse_args()
     item = getFestivalItem(host, params)
+    print(type(item))
     imgList = getFestivalImgUrl(item)
     titleList = getFestivalTitle(item)
     contentIdList = getFestivalContentId(item)
-    overviewList = getFestivalOverView(contentIdList)
+    overviewList,addrList = getFestivalOverView(contentIdList)
     startList, endList = getFestivalDate(contentIdList)
-    for i in range(12):
-        festival = dict(img="", title="", contentId="", overview="", startDate="", endDate="")
+    for i in range(len(item)):
+        festival = dict(img="", title="", contentId="", overview="", startDate="", endDate="",addr="")
         festival['img'] = imgList[i]
         festival['title'] = titleList[i]
         festival['contentId'] = contentIdList[i]
         festival['overview'] = overviewList[i]
         festival['startDate'] = startList[i]
         festival['endDate'] = endList[i]
+        festival['addr'] = addrList[i]
         list.append(festival)
     jsonVal = json.dumps(list, ensure_ascii=False, indent=4)
     return jsonVal
@@ -88,14 +127,16 @@ def getFestivalOverView(contentIdList):
 
     }
     list = []
-
+    address = []
     for i in contentIdList:
         query['contentId'] = i
         item = getFestivalItem(host, query)
         s = item['overview']
+        addr = item['addr1']
         s = re.sub('(<([^>]+)>)', '', s)
         list.append(s)
-    return list
+        address.append(addr)
+    return list, address
 
 
 def getFestivalItem(url, query):

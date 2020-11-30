@@ -42,8 +42,12 @@ def not_found(error):
     return render_template('404.html')
 @app.route('/festival')
 @app.route('/festival/<pageNum>', methods=['GET'])
-def getFestival(pageNum=1):
-    return festivalInfo.getFestival(pageNum)
+def getFestival(pageNum=1,city=""):
+    return festivalInfo.getFestival(pageNum,city)
+
+@app.route('/festival/<pageNum>/<city>', methods=['GET'])
+def getCityFestival(pageNum=1,city="가평시"):
+    return festivalInfo.getFestival(pageNum,city)
 
 @app.route('/festival.html/<pageNum>')
 @app.route('/festival.html', methods=['GET'])

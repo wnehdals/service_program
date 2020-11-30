@@ -220,7 +220,7 @@
     <div class="row">
         <div class="col-lg-12 my-4">
             <h3>축제/행사</h3>
-            <ht>http://127.0.0.1:5000/festival/{pageNum}</ht>
+            <ht>http://127.0.0.1:5000/festival/{pageNum}/{cityCode}</ht>
             <h4>요청 형식</h4>
             <table class="table">
                 <thead class="thead-light">
@@ -237,6 +237,12 @@
                     <td>pageNum</td>
                     <td>필수</td>
                     <td>페이지 번호</td>
+                </tr>
+                 <tr>
+                    <th scope="row">1</th>
+                    <td>pageNum</td>
+                    <td>필수</td>
+                    <td>도시 코드</td>
                 </tr>
                 </tbody>
             </table>
@@ -287,6 +293,12 @@
                     <td>필수</td>
                     <td>축제/행사 마감일</td>
                 </tr>
+                <tr>
+                    <th scope="row">6</th>
+                    <td>addr</td>
+                    <td>필수</td>
+                    <td>주소</td>
+                </tr>
                 </tbody>
             </table>
             <form role="form">
@@ -294,6 +306,9 @@
                     <label for="festival_input">페이지 번호</label>
                     <input type="number" id="festival_input" class="form-control" placeholder="1">
                     <small class="form-text form-muted">축제, 행사 목록의 페이지 번호를 입력해주세요.</small>
+                    <label for="festival_input">도시 코드</label>
+                    <input type="number" id="festival_city_input" class="form-control" placeholder="1">
+                    <small class="form-text form-muted">도시코드를 번호를 입력해주세요.</small>
                 </div>
                 <div class="form-group">
                     <textarea id="festival_output" class="form-control" rows="10" readonly="true"></textarea>
@@ -517,9 +532,11 @@
 <script type="text/javascript">
     function getFestivalInfo() {
         festivalPageNum = document.getElementById('festival_input').value
+        festivalCityCode = document.getElementById('festival_city_input').value
         if(festivalPageNum == "") festivalPageNum = 1
+        if(festivalCityCode == "") festivalCityCode = ""
         console.log(festivalPageNum)
-        var url = 'http://127.0.0.1:5000/festival/' + String(festivalPageNum)
+        var url = 'http://127.0.0.1:5000/festival/' + String(festivalPageNum) +"/"+ String(festivalCityCode)
         console.log(url)
         fetch(url)
             .then(response => response.text())
