@@ -173,6 +173,9 @@ def response_hospital_info(longitude, latitude):
     return json_response
 
 
+############################################################################
+#                           USE THIS VERSION!!!                            #
+############################################################################
 def response_hospital_info_v2(address_major: str, address_minor: str):
     response_raw = request_api_v2(address_major, address_minor)
     response_raw_tree = ET.fromstring(response_raw.text)
