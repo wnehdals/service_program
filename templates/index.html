@@ -270,6 +270,12 @@
     <div class="row">
         <div class="col-lg-12 my-4">
             <h3>병원</h3>
+            <h4>요청 URL</h4>
+            <div>
+                <p class="lead" style="font-weight:400;">
+                    /hospital/requestv2/&lt;major_address&gt;/&lt;minor_address&gt;
+                </p>
+            </div>
             <h4>요청 형식</h4>
             <table class="table">
                 <thead class="thead-light">
@@ -283,15 +289,15 @@
                 <tbody>
                 <tr>
                     <th scope="row">1</th>
-                    <td>longitude</td>
+                    <td>address_major</td>
                     <td>필수</td>
-                    <td>현재 위치(경도) 주변에서 소아병원을 탐색하기 위해 필요합니다.</td>
+                    <td>병원을 검색하고자 하는 위치의 도 이름입니다. ex) 충청북도, 경기도</td>
                 </tr>
                 <tr>
                     <th scope="row">2</th>
-                    <td>latitude</td>
+                    <td>address_minor</td>
                     <td>필수</td>
-                    <td>현재 위치(위도) 주변에서 소아병원을 탐색하기 위해 필요합니다.</td>
+                    <td>병원을 검색하고자 하는 위치의 시군구 이름입니다. ex) 청주시, 성남시</td>
                 </tr>
                 </tbody>
             </table>
@@ -356,50 +362,50 @@
                 </tr>
                 <tr>
                     <th scope="row">3</th>
-                    <td>hospital_list.distance</td>
-                    <td>2.66</td>
-                    <td>경도, 위도에 기반한 해당 병원까지의 거리입니다.</td>
-                </tr>
-                <tr>
-                    <th scope="row">4</th>
                     <td>hospital_list.address</td>
-                    <td>서울특별시 강남구 헌릉로569길 27, 2층 (세곡동, 2층일부(201-2호,202호))</td>
+                    <td>2.66</td>
                     <td>해당 병원의 주소입니다.</td>
                 </tr>
                 <tr>
-                    <th scope="row">5</th>
+                    <th scope="row">4</th>
                     <td>hospital_list.level</td>
-                    <td>C</td>
+                    <td>의원</td>
                     <td>공공 API에서 <a href="#" data-toggle="modal" data-target="#hospital_level_model">규정</a>한 병원의 등급입니다.</td>
                 </tr>
                 <tr>
+                    <th scope="row">5</th>
+                    <td>hospital_list.emergency_code_name</td>
+                    <td>응급의료기관 이외</td>
+                    <td>해당 병원의 응급의료기관코드명입니다.</td>
+                </tr>
+                <tr>
                     <th scope="row">6</th>
-                    <td>hospital_list.facility</td>
-                    <td>의원</td>
-                    <td>해당 병원의 분류명입니다.</td>
+                    <td>hospital_list.emergency_room_available</td>
+                    <td>true</td>
+                    <td>해당 병원에서 응급실을 운영하고 있는지 여부입니다.</td>
                 </tr>
                 <tr>
                     <th scope="row">7</th>
-                    <td>hospital_list.emergency_code</td>
-                    <td>G099</td>
-                    <td>해당 병원의 응급의료기관코드입니다.</td>
+                    <td>hospital_list.information</td>
+                    <td>운천내과와 주,야간 교대근무/주간:식도가시제거/수액○/사후피임약처방○/독감간이검사X</td>
+                    <td>해당 병원에 대한 상세한 설명입니다.</td>
                 </tr>
                 <tr>
                     <th scope="row">8</th>
-                    <td>hospital_list.fax_number</td>
-                    <td>02-3412-9119</td>
-                    <td>해당 병원의 팩스번호입니다.</td>
+                    <td>hospital_list.information_etc</td>
+                    <td>평일 18:00 ~ 23:00 토요일 일요일 및 공휴일 09:00 ~ 23:00 8월 14일 최신화</td>
+                    <td>해당 병원 정보의 비고 항목입니다.</td>
                 </tr>
                 <tr>
                     <th scope="row">9</th>
-                    <td>hospital_list.status</td>
-                    <td>1</td>
-                    <td>해당 병원의 운영상태입니다.</td>
+                    <td>hospital_list.address_alias</td>
+                    <td>진양아파트 맞은편</td>
+                    <td>해당 병원의 추가적인 위치 정보입니다.</td>
                 </tr>
                 <tr>
                     <th scope="row">10</th>
                     <td>hospital_list.name</td>
-                    <td>세곡달빛의원</td>
+                    <td>손범수달빛의원</td>
                     <td>해당 병원의 이름입니다.</td>
                 </tr>
                 <tr>
@@ -410,49 +416,115 @@
                 </tr>
                 <tr>
                     <th scope="row">12</th>
-                    <td>hospital_list.end_time</td>
-                    <td>2300</td>
-                    <td>해당 병원의 영업 종료시간입니다.</td>
-                </tr>
-                <tr>
-                    <th scope="row">13</th>
-                    <td>hospital_list.hospital_id</td>
-                    <td>A1118816</td>
-                    <td>해당 병원의 고유번호입니다.</td>
-                </tr>
-                <tr>
-                    <th scope="row">14</th>
                     <td>hospital_list.latitude</td>
-                    <td>37.466811295905444</td>
+                    <td>36.65073962093224</td>
                     <td>해당 병원의 위도입니다.</td>
                 </tr>
                 <tr>
-                    <th scope="row">15</th>
+                    <th scope="row">13</th>
                     <td>hospital_list.longitude</td>
-                    <td>2.66</td>
+                    <td>127.47431470458069</td>
                     <td>해당 병원의 경도입니다.</td>
                 </tr>
                 <tr>
+                    <th scope="row">14</th>
+                    <td>hospital_list.start_time_mon</td>
+                    <td>1800</td>
+                    <td>해당 병원의 월요일 영업 시작시간입니다.</td>
+                </tr>
+                <tr>
+                    <th scope="row">15</th>
+                    <td>hospital_list.close_time_mon</td>
+                    <td>2300</td>
+                    <td>해당 병원의 월요일 영업 종료시간입니다.</td>
+                </tr>
+                <tr>
                     <th scope="row">16</th>
-                    <td>hospital_list.start_time</td>
+                    <td>hospital_list.start_time_tue</td>
+                    <td>1800</td>
+                    <td>해당 병원의 화요일 영업 시작시간입니다.</td>
+                </tr>
+                <tr>
+                    <th scope="row">17</th>
+                    <td>hospital_list.close_time_tue</td>
+                    <td>2300</td>
+                    <td>해당 병원의 화요일 영업 종료시간입니다.</td>
+                </tr>
+                <tr>
+                    <th scope="row">18</th>
+                    <td>hospital_list.start_time_wed</td>
+                    <td>1800</td>
+                    <td>해당 병원의 수요일 영업 시작시간입니다.</td>
+                </tr>
+                <tr>
+                    <th scope="row">19</th>
+                    <td>hospital_list.close_time_wed</td>
+                    <td>2300</td>
+                    <td>해당 병원의 수요일 영업 종료시간입니다.</td>
+                </tr>
+                <tr>
+                    <th scope="row">20</th>
+                    <td>hospital_list.start_time_thu</td>
+                    <td>1800</td>
+                    <td>해당 병원의 목요일 영업 시작시간입니다.</td>
+                </tr>
+                <tr>
+                    <th scope="row">21</th>
+                    <td>hospital_list.close_time_thu</td>
+                    <td>2300</td>
+                    <td>해당 병원의 목요일 영업 종료시간입니다.</td>
+                </tr>
+                <tr>
+                    <th scope="row">22</th>
+                    <td>hospital_list.start_time_fri</td>
+                    <td>1800</td>
+                    <td>해당 병원의 금요일 영업 시작시간입니다.</td>
+                </tr>
+                <tr>
+                    <th scope="row">23</th>
+                    <td>hospital_list.close_time_fri</td>
+                    <td>2300</td>
+                    <td>해당 병원의 금요일 영업 종료시간입니다.</td>
+                </tr>
+                <tr>
+                    <th scope="row">24</th>
+                    <td>hospital_list.start_time_sat</td>
                     <td>0900</td>
-                    <td>해당 병원의 영업 시작시간입니다.</td>
+                    <td>해당 병원의 토요일 영업 시작시간입니다.</td>
+                </tr>
+                <tr>
+                    <th scope="row">25</th>
+                    <td>hospital_list.close_time_sat</td>
+                    <td>2300</td>
+                    <td>해당 병원의 토요일 영업 종료시간입니다.</td>
+                </tr>
+                <tr>
+                    <th scope="row">26</th>
+                    <td>hospital_list.start_time_sun</td>
+                    <td>0900</td>
+                    <td>해당 병원의 일요일 영업 시작시간입니다.</td>
+                </tr>
+                <tr>
+                    <th scope="row">27</th>
+                    <td>hospital_list.close_time_sun</td>
+                    <td>2300</td>
+                    <td>해당 병원의 일요일 영업 종료시간입니다.</td>
                 </tr>
                 </tbody>
             </table>
-
+            <h4>API 모의 요청</h4>
             <div class="form-group">
                 <form role="form">
                     <div class="form-group">
-                        <label for="hospital_input_longitude">경도</label>
-                        <input type="number" id="hospital_input_longitude" class="form-control" placeholder="longitude" value="127.0851566">
-                        <small class="form-text text-muted">병원 탐색을 위한 경도를 입력해주세요.</small>
+                        <label for="hospital_input_major_address">도명</label>
+                        <input type="text" id="hospital_input_major_address" class="form-control" placeholder="도" value="서울특별시">
+                        <small class="form-text text-muted">병원 탐색을 위한 주소를 입력해주세요.</small>
                     </div>
 
                     <div class="form-group">
-                        <label for="hospital_input_latitude">위도</label>
-                        <input type="number" id="hospital_input_latitude" class="form-control" placeholder="latitude" value="37.48813256">
-                        <small class="form-text text-muted">병원 탐색을 위한 위도를 입력해주세요.</small>
+                        <label for="hospital_input_minor_address">시군구명</label>
+                        <input type="text" id="hospital_input_minor_address" class="form-control" placeholder="시군구" value="강남구">
+                        <small class="form-text text-muted">병원 탐색을 위한 상세주소를 입력해주세요.</small>
                     </div>
 
                     <div class="form-group">
@@ -495,13 +567,10 @@
     }
 
     function getHospitalInfo(){
-        longitude = document.getElementById('hospital_input_longitude').value
-        latitude = document.getElementById('hospital_input_latitude').value
+        major = document.getElementById('hospital_input_major_address').value
+        minor = document.getElementById('hospital_input_minor_address').value
 
-        if(longitude == "") longitude = "127.0851566"
-        if(latitude == "") latitude = "37.48813256"
-
-        hospitalInfoRequestURL = '/hospital/request/' + longitude + '/' + latitude
+        hospitalInfoRequestURL = '/hospital/requestv2/' + major + '/' + minor
 
         fetch(hospitalInfoRequestURL).then(response => response.text()).then((data) => {
             document.getElementById('hospital_output').value = data
