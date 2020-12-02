@@ -3,8 +3,15 @@ import hospital_demo
 import requests
 import json
 import re
+import Response
+def getErrorFestival():
+    response = Response.Response(400).getResponse()
 
-def getFestival(pageNum=1,city=''):
+    jsonVal = json.dumps(response, ensure_ascii=False, indent=4)
+
+    return jsonVal
+
+def getFestival(city):
     host = 'http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList'
     cityDic = {
         '가평군' : '1',
@@ -50,7 +57,6 @@ def getFestival(pageNum=1,city=''):
               'numOfRows': '12',
               'pageNo': '1',
               '_type': 'json'}
-    params['pageNo'] = pageNum
     if(city == ""):
         params['sigunguCode'] = city
     else:
@@ -59,25 +65,63 @@ def getFestival(pageNum=1,city=''):
     #parser = reqparse.RequestParser()
     #parser.add_argument('pageNum', required=true, type=string)
     #arg = parser.parse_args()
-    item = getFestivalItem(host, params)
-    print(type(item))
-    imgList = getFestivalImgUrl(item)
-    titleList = getFestivalTitle(item)
-    contentIdList = getFestivalContentId(item)
-    overviewList,addrList = getFestivalOverView(contentIdList)
-    startList, endList = getFestivalDate(contentIdList)
-    for i in range(len(item)):
-        festival = dict(img="", title="", contentId="", overview="", startDate="", endDate="",addr="")
-        festival['img'] = imgList[i]
-        festival['title'] = titleList[i]
-        festival['contentId'] = contentIdList[i]
-        festival['overview'] = overviewList[i]
-        festival['startDate'] = startList[i]
-        festival['endDate'] = endList[i]
-        festival['addr'] = addrList[i]
-        list.append(festival)
-    jsonVal = json.dumps(list, ensure_ascii=False, indent=4)
-    return jsonVal
+    totalCount = getFestivalTotalCount(host, params)
+    print(totalCount)
+    params['numOfRows'] = totalCount
+    if(totalCount == 0):
+        festival = dict(img="", title="", contentId="", overview="", startDate="", endDate="", addr="")
+        response = Response.Response(200)
+        response.setBody(festival)
+        response = response.getResponse()
+        jsonVal = json.dumps(response, ensure_ascii=False, indent=4)
+        return jsonVal
+    elif totalCount == 1:
+        item = getFestivalItem(host,params)
+        oneList = []
+        oneList.append(item)
+        item = oneList
+        imgList = getFestivalImgUrl(item)
+        titleList = getFestivalTitle(item)
+        contentIdList = getFestivalContentId(item)
+        overviewList,addrList = getFestivalOverView(contentIdList)
+        startList, endList = getFestivalDate(contentIdList)
+        for i in range(len(item)):
+            festival = dict(img="", title="", contentId="", overview="", startDate="", endDate="",addr="")
+            festival['img'] = imgList[i]
+            festival['title'] = titleList[i]
+            festival['contentId'] = contentIdList[i]
+            festival['overview'] = overviewList[i]
+            festival['startDate'] = startList[i]
+            festival['endDate'] = endList[i]
+            festival['addr'] = addrList[i]
+            list.append(festival)
+        response = Response.Response(200)
+        response.setBody(list)
+        response = response.getResponse()
+        jsonVal = json.dumps(response, ensure_ascii=False, indent=4)
+        return jsonVal
+    else:
+        item = getFestivalItem(host, params)
+        imgList = getFestivalImgUrl(item)
+        titleList = getFestivalTitle(item)
+        contentIdList = getFestivalContentId(item)
+        overviewList, addrList = getFestivalOverView(contentIdList)
+        startList, endList = getFestivalDate(contentIdList)
+        for i in range(len(item)):
+            festival = dict(img="", title="", contentId="", overview="", startDate="", endDate="", addr="")
+            festival['img'] = imgList[i]
+            festival['title'] = titleList[i]
+            festival['contentId'] = contentIdList[i]
+            festival['overview'] = overviewList[i]
+            festival['startDate'] = startList[i]
+            festival['endDate'] = endList[i]
+            festival['addr'] = addrList[i]
+            list.append(festival)
+        response = Response.Response(200)
+        response.setBody(list)
+        response = response.getResponse()
+        jsonVal = json.dumps(response, ensure_ascii=False, indent=4)
+        return jsonVal
 def getFestivalDate(contentIdList):
     host = 'http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailIntro'
     query = {
@@ -146,6 +190,13 @@ def getFestivalItem(url, query):
     items = body['items']
     item = items['item']
     return item
+
+def getFestivalTotalCount(url, query):
+    res = requests.get(url, params=query).json()
+    response = res['response']
+    body = response['body']
+    totalCount = body['totalCount']
+    return totalCount
 
 
 def getFestivalContentId(item):
