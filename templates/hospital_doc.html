@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>어린이 병원 찾기 - API Document</title>
+
+   <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/static/vendor/bootstrap/css/bootstrap.css">
+
+  <!-- Custom styles for this template -->
+  <link href="static/css/modern-business.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+ <!-- Navigation -->
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Hospital API Document</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/index.html">Main Page</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <div class="container" style="margin-top:100px">
+
+    <!-- Page Heading/Breadcrumbs -->
+    <h1 class="mt-4 mb-3">정제된 병원 API 호출 문서</h1>
+    <hr>
+
+   <div class="row">
+        <div class="col-lg-12 my-2">
+            <h3>병원</h3>
+            <h4>요청 URL</h4>
+            <div>
+                <p class="lead" style="font-weight:400;">
+                    /hospital/requestv2/&lt;major_address&gt;/&lt;minor_address&gt;
+                </p>
+            </div>
+            <h4>요청 형식</h4>
+            <table class="table">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">항목명</th>
+                    <th scope="col">항목구분</th>
+                    <th scope="col">항목설명</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>address_major</td>
+                    <td>필수</td>
+                    <td>병원을 검색하고자 하는 위치의 도 이름입니다. ex) 충청북도, 경기도</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>address_minor</td>
+                    <td>필수</td>
+                    <td>병원을 검색하고자 하는 위치의 시군구 이름입니다. ex) 청주시, 성남시</td>
+                </tr>
+                </tbody>
+            </table>
+            <h4>응답 형식</h4>
+            <div class="modal fade" id="hospital_level_model" tabindex="-1" role="dialog" aria-labelledby="hospital_level_model" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">병원 등급</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <ul>
+                        <li>A[상급종합병원, 종합병원]</li>
+                        <li>B[병원, 군 병원]</li>
+                        <li>C[의원,군 의원]</li>
+                        <li>D[요양병원]</li>
+                        <li>E[한방병원]</li>
+                        <li>G[한의원,군 한의원]</li>
+                        <li>H[약국]</li>
+                        <li>I[기타]</li>
+                        <li>M[치과병원]</li>
+                        <li>N[치과의원]</li>
+                        <li>R[보건소, 보건지소, 보건진료소, 보건의료원, S이송단체]</li>
+                        <li>T[119구급대]</li>
+                        <li>U[경찰서(교도소포함)]</li>
+                        <li>V[지방자치단체]</li>
+                        <li>W[기타시설, 군 기타]</li>
+                        <li>Y[중앙응급의료센터]</li>
+                        <li>Z[응급의료지원센터]</li>
+                    </ul>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <table class="table">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">항목명</th>
+                    <th scope="col">예시</th>
+                    <th scope="col">항목설명</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>status</td>
+                    <td>true</td>
+                    <td>달빛어린이병원 API 요청이 잘 전송되어 데이터를 얻을 수 있었는지 나타냅니다.</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>hospital_list</td>
+                    <td>list&lt;dictionary&gt;</td>
+                    <td>달빛어린이병원 API 요청으로 받은 병원들의 정제된 데이터입니다.</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>hospital_list.address</td>
+                    <td>2.66</td>
+                    <td>해당 병원의 주소입니다.</td>
+                </tr>
+                <tr>
+                    <th scope="row">4</th>
+                    <td>hospital_list.level</td>
+                    <td>의원</td>
+                    <td>공공 API에서 <a href="#" data-toggle="modal" data-target="#hospital_level_model">규정</a>한 병원의 등급입니다.</td>
+                </tr>
+                <tr>
+                    <th scope="row">5</th>
+                    <td>hospital_list.emergency_code_name</td>
+                    <td>응급의료기관 이외</td>
+                    <td>해당 병원의 응급의료기관코드명입니다.</td>
+                </tr>
+                <tr>
+                    <th scope="row">6</th>
+                    <td>hospital_list.emergency_room_available</td>
+                    <td>true</td>
+                    <td>해당 병원에서 응급실을 운영하고 있는지 여부입니다.</td>
+                </tr>
+                <tr>
+                    <th scope="row">7</th>
+                    <td>hospital_list.information</td>
+                    <td>운천내과와 주,야간 교대근무/주간:식도가시제거/수액○/사후피임약처방○/독감간이검사X</td>
+                    <td>해당 병원에 대한 상세한 설명입니다.</td>
+                </tr>
+                <tr>
+                    <th scope="row">8</th>
+                    <td>hospital_list.information_etc</td>
+                    <td>평일 18:00 ~ 23:00 토요일 일요일 및 공휴일 09:00 ~ 23:00 8월 14일 최신화</td>
+                    <td>해당 병원 정보의 비고 항목입니다.</td>
+                </tr>
+                <tr>
+                    <th scope="row">9</th>
+                    <td>hospital_list.address_alias</td>
+                    <td>진양아파트 맞은편</td>
+                    <td>해당 병원의 추가적인 위치 정보입니다.</td>
+                </tr>
+                <tr>
+                    <th scope="row">10</th>
+                    <td>hospital_list.name</td>
+                    <td>손범수달빛의원</td>
+                    <td>해당 병원의 이름입니다.</td>
+                </tr>
+                <tr>
+                    <th scope="row">11</th>
+                    <td>hospital_list.contact</td>
+                    <td>02-459-0119</td>
+                    <td>해당 병원의 대표전화입니다.</td>
+                </tr>
+                <tr>
+                    <th scope="row">12</th>
+                    <td>hospital_list.latitude</td>
+                    <td>36.65073962093224</td>
+                    <td>해당 병원의 위도입니다.</td>
+                </tr>
+                <tr>
+                    <th scope="row">13</th>
+                    <td>hospital_list.longitude</td>
+                    <td>127.47431470458069</td>
+                    <td>해당 병원의 경도입니다.</td>
+                </tr>
+                <tr>
+                    <th scope="row">14</th>
+                    <td>hospital_list.start_time_mon</td>
+                    <td>1800</td>
+                    <td>해당 병원의 월요일 영업 시작시간입니다.</td>
+                </tr>
+                <tr>
+                    <th scope="row">15</th>
+                    <td>hospital_list.close_time_mon</td>
+                    <td>2300</td>
+                    <td>해당 병원의 월요일 영업 종료시간입니다.</td>
+                </tr>
+                <tr>
+                    <th scope="row">16</th>
+                    <td>hospital_list.start_time_tue</td>
+                    <td>1800</td>
+                    <td>해당 병원의 화요일 영업 시작시간입니다.</td>
+                </tr>
+                <tr>
+                    <th scope="row">17</th>
+                    <td>hospital_list.close_time_tue</td>
+                    <td>2300</td>
+                    <td>해당 병원의 화요일 영업 종료시간입니다.</td>
+                </tr>
+                <tr>
+                    <th scope="row">18</th>
+                    <td>hospital_list.start_time_wed</td>
+                    <td>1800</td>
+                    <td>해당 병원의 수요일 영업 시작시간입니다.</td>
+                </tr>
+                <tr>
+                    <th scope="row">19</th>
+                    <td>hospital_list.close_time_wed</td>
+                    <td>2300</td>
+                    <td>해당 병원의 수요일 영업 종료시간입니다.</td>
+                </tr>
+                <tr>
+                    <th scope="row">20</th>
+                    <td>hospital_list.start_time_thu</td>
+                    <td>1800</td>
+                    <td>해당 병원의 목요일 영업 시작시간입니다.</td>
+                </tr>
+                <tr>
+                    <th scope="row">21</th>
+                    <td>hospital_list.close_time_thu</td>
+                    <td>2300</td>
+                    <td>해당 병원의 목요일 영업 종료시간입니다.</td>
+                </tr>
+                <tr>
+                    <th scope="row">22</th>
+                    <td>hospital_list.start_time_fri</td>
+                    <td>1800</td>
+                    <td>해당 병원의 금요일 영업 시작시간입니다.</td>
+                </tr>
+                <tr>
+                    <th scope="row">23</th>
+                    <td>hospital_list.close_time_fri</td>
+                    <td>2300</td>
+                    <td>해당 병원의 금요일 영업 종료시간입니다.</td>
+                </tr>
+                <tr>
+                    <th scope="row">24</th>
+                    <td>hospital_list.start_time_sat</td>
+                    <td>0900</td>
+                    <td>해당 병원의 토요일 영업 시작시간입니다.</td>
+                </tr>
+                <tr>
+                    <th scope="row">25</th>
+                    <td>hospital_list.close_time_sat</td>
+                    <td>2300</td>
+                    <td>해당 병원의 토요일 영업 종료시간입니다.</td>
+                </tr>
+                <tr>
+                    <th scope="row">26</th>
+                    <td>hospital_list.start_time_sun</td>
+                    <td>0900</td>
+                    <td>해당 병원의 일요일 영업 시작시간입니다.</td>
+                </tr>
+                <tr>
+                    <th scope="row">27</th>
+                    <td>hospital_list.close_time_sun</td>
+                    <td>2300</td>
+                    <td>해당 병원의 일요일 영업 종료시간입니다.</td>
+                </tr>
+                </tbody>
+            </table>
+            <a href="/hospital/demo"><button class="btn btn-primary btn-block mb-3">API 모의 요청결과 확인</button></a>
+        </div>
+    </div>
+
+  </div>
+  <!-- /.container -->
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2020</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+ <!-- Bootstrap core JavaScript -->
+  <script src="https:ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script type="text/javascript" src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

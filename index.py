@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, render_template
-import hospital_demo
+import hospital
 import requests
 import json
 import re
@@ -58,19 +58,23 @@ def festival(pageNum=1):
 
 
 @app.route('/hospital/request/<longitude>/<latitude>', methods=['GET'])
-def hospital_request(longitude, latitude):
-    return hospital_demo.response_hospital_info(longitude, latitude)
+def hospital_request_lonlat(longitude, latitude):
+    return hospital.response_hospital_info_lonlat(longitude, latitude)
 
 
-@app.route('/hospital/requestv2/<major>/<minor>', methods=['GET'])
-def hospital_request_v2(major, minor):
-    return hospital_demo.response_hospital_info_v2(major, minor)
+@app.route('/hospital/request/address/<major>/<minor>', methods=['GET'])
+def hospital_request_address(major, minor):
+    return hospital.response_hospital_info_address(major, minor)
 
 
-@app.route('/hospital')
-def hospital():
-    # return render_template('hospital.html')
-    return hospital_demo.demo()
+@app.route('/hospital/demo')
+def hospital_demo():
+    return hospital.demo()
+
+
+@app.route('/hospital/doc')
+def hospital_doc():
+    return hospital.doc()
 
 
 if __name__ == '__main__':

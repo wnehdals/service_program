@@ -1,21 +1,19 @@
 class Hospital:
-    distance = 0.0
-    address = "HOSPITAL_ADDRESS"
-    level = "HOSPITAL_LEVEL"
-    facility = "FACILITY_CLASS"
-    emergency_code = "EMERGENCY_CODE"
-    fax_number = "FAX_NUMBER"
-    status = "RUNNING_STATUS"
-    name = "HOSPITAL_NAME"
-    contact = "HOSPITAL_CONTACT"
-    start_time = "HOSPITAL_START_TIME"
-    end_time = "HOSPITAL_END_TIME"
-    hospital_id = "HOSPITAL_ID"
-    latitude = "HOSPITAL_LATITUDE"
-    longitude = "HOSPITAL_ALTITUDE"
-
     def __init__(self):
-        pass
+        self.distance = 0.0
+        self.address = "HOSPITAL_ADDRESS"
+        self.level = "HOSPITAL_LEVEL"
+        self.facility = "FACILITY_CLASS"
+        self.emergency_code = "EMERGENCY_CODE"
+        self.fax_number = "FAX_NUMBER"
+        self.status = "RUNNING_STATUS"
+        self.name = "HOSPITAL_NAME"
+        self.contact = "HOSPITAL_CONTACT"
+        self.start_time = "HOSPITAL_START_TIME"
+        self.end_time = "HOSPITAL_END_TIME"
+        self.hospital_id = "HOSPITAL_ID"
+        self.latitude = "HOSPITAL_LATITUDE"
+        self.longitude = "HOSPITAL_ALTITUDE"
 
 
 class Hospital_v2:

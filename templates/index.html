@@ -124,8 +124,8 @@
                     <p class="card-text">경기도에 위치하는 소아전문센터 정보를 제공하고 있습니다.</p>
                 </div>
                 <div class="card-footer">
-                     <a href="hospital" class="btn btn-primary">API 문서</a>
-                    <a href="hospital" class="btn btn-info">예시</a>
+                     <a href="/hospital/doc" class="btn btn-primary">API 문서</a>
+                    <a href="/hospital/demo" class="btn btn-info">예시</a>
                 </div>
             </div>
         </div>
@@ -174,21 +174,16 @@
             })
     }
 
-    function getHospitalInfo() {
-        longitude = document.getElementById('hospital_input_longitude').value
-        latitude = document.getElementById('hospital_input_latitude').value
+    function getHospitalInfo(){
+        major = document.getElementById('hospital_input_major_address').value
+        minor = document.getElementById('hospital_input_minor_address').value
 
-        if (longitude == "") longitude = "127.0851566"
-        if (latitude == "") latitude = "37.48813256"
-
-        hospitalInfoRequestURL = '/hospital/request/' + longitude + '/' + latitude
+        hospitalInfoRequestURL = '/hospital/request/address/' + major + '/' + minor
 
         fetch(hospitalInfoRequestURL).then(response => response.text()).then((data) => {
             document.getElementById('hospital_output').value = data
             console.log("job done")
         })
-
-
     }
 
     function getChildrenInfo() {
