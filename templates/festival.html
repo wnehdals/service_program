@@ -373,22 +373,21 @@
 <script type="text/javascript" src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript">
     function getFestivalInfo(pageNum) {
-        var url = 'http://127.0.0.1:5000/festival/' + String(pageNum)
+        var url = 'http://127.0.0.1:5000/festival/1'
         fetch(url)
             .then(response => response.json())
-            .then((data) => {
-                for (var i = 0; i < 12; i++) {
+            .then((item) => {
+                for (var i = 0; i < item.body.length; i++) {
                     var titleId = 'title_' + String(i)
                     var overviewId = 'overview_' + String(i)
                     var imgId = 'img_' + String(i)
                     var startId = 'startDate_' + String(i)
                     var endId = 'endDate_' + String(i)
-                    console.log(startId)
-                    document.getElementById(titleId).innerHTML = data[i].title
-                    document.getElementById(overviewId).innerHTML = data[i].overview
-                    document.getElementById(imgId).innerHTML = '<img class="img-fluid rounded mb-3 mb-md-0" src=' + data[i].img + ' alt="">'
-                    document.getElementById(startId).innerHTML = '행사 시작일 : ' + data[i].startDate
-                    document.getElementById(endId).innerHTML = '행사 종료일 : ' + data[i].endDate
+                    document.getElementById(titleId).innerHTML = item.body[i].title
+                    document.getElementById(overviewId).innerHTML = item.body[i].overview
+                    document.getElementById(imgId).innerHTML = '<img class="img-fluid rounded mb-3 mb-md-0" src=' + item.body[i].img + ' alt="">'
+                    document.getElementById(startId).innerHTML = '행사 시작일 : ' + item.body[i].startDate
+                    document.getElementById(endId).innerHTML = '행사 종료일 : ' + item.body[i].endDate
 
                 }
             })

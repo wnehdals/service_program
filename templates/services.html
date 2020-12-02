@@ -3,127 +3,180 @@
 
 <head>
 
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-  <title>Modern Business - Start Bootstrap Template</title>
+    <title>좋은 부모가 되기 위한 API - Be A Good Parents</title>
 
-   <!-- Bootstrap core CSS -->
-  <link rel="stylesheet" href="/static/vendor/bootstrap/css/bootstrap.css">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="/static/vendor/bootstrap/css/bootstrap.css">
 
-  <!-- Custom styles for this template -->
-  <link href="static/css/modern-business.css" rel="stylesheet">
-
+    <!-- Custom styles for this template -->
+    <link href="static/css/modern-business.css" rel="stylesheet">
+    <style>
+        .text-stroke {
+            color: white;
+            text-shadow: -1px -1px 0 #000,
+            1px -1px 0 #000,
+            -1px 1px 0 #000,
+            1px 1px 0 #000;
+        }
+    </style>
 </head>
 
 <body>
-
-  <!-- Navigation -->
-  <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+<!-- Navigation -->
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="index.html">Start Bootstrap</a>
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="about.html">About</a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="services.html">Services</a>
-          </li>
-
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPages" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Other Pages
-            </a>
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPages">
-              <a class="dropdown-item" href="full-width.html">Full Width Page</a>
-              <a class="dropdown-item" href="sidebar.html">Sidebar Page</a>
-              <a class="dropdown-item" href="faq.html">FAQ</a>
-              <a class="dropdown-item" href="404.html">404</a>
-              <a class="dropdown-item" href="pricing.html">Pricing Table</a>
-            </div>
-          </li>
-        </ul>
-      </div>
+        <a class="navbar-brand" href="index.html">Be a good parents</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="about.html">API Document</a>
+                </li>
+            </ul>
+        </div>
     </div>
-  </nav>
+</nav>
 
-  <!-- Page Content -->
-  <div class="container">
+
+<!-- Page Content -->
+<div class="container">
 
     <!-- Page Heading/Breadcrumbs -->
-    <h1 class="mt-4 mb-3">Services
-      <small>Subheading</small>
+    <h1 class="mt-4 mb-3">축제/행사 API
     </h1>
 
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item">
-        <a href="index.html">Home</a>
-      </li>
-      <li class="breadcrumb-item active">Services</li>
-    </ol>
-
-    <!-- Image Header -->
-    <img class="img-fluid rounded mb-4" src="http://placehold.it/1200x300" alt="">
-
-    <!-- Marketing Icons Section -->
     <div class="row">
-      <div class="col-lg-4 mb-4">
-        <div class="card h-100">
-          <h4 class="card-header">유치원</h4>
-          <div class="card-body">
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
-          </div>
-          <div class="card-footer">
-            <a href="children.html" class="btn btn-primary">Learn More</a>
-          </div>
+        <div class="col-lg-12 my-4">
+            <ht>URL : http://127.0.0.1:5000/festival/{cityCode}</ht>
+            <h4>요청 형식</h4>
+            <table class="table">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">항목명</th>
+                    <th scope="col">항목구분</th>
+                    <th scope="col">항목설명</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>pageNum</td>
+                    <td>필수</td>
+                    <td>도시 코드</td>
+                </tr>
+                </tbody>
+            </table>
+            <h4>응답 형식</h4>
+            <table class="table">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">항목명</th>
+                    <th scope="col">항목구분</th>
+                    <th scope="col">항목설명</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>title</td>
+                    <td>필수</td>
+                    <td>축제/행사 이름</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>img</td>
+                    <td>필수</td>
+                    <td>대표사진</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>contentId</td>
+                    <td>필수</td>
+                    <td>id</td>
+                </tr>
+                <tr>
+                    <th scope="row">4</th>
+                    <td>overview</td>
+                    <td>필수</td>
+                    <td>축제/행사 내용</td>
+                </tr>
+                <tr>
+                    <th scope="row">5</th>
+                    <td>startDate</td>
+                    <td>필수</td>
+                    <td>축제/행사 시작일</td>
+                </tr>
+                <tr>
+                    <th scope="row">6</th>
+                    <td>endDate</td>
+                    <td>필수</td>
+                    <td>축제/행사 마감일</td>
+                </tr>
+                <tr>
+                    <th scope="row">6</th>
+                    <td>addr</td>
+                    <td>필수</td>
+                    <td>주소</td>
+                </tr>
+                </tbody>
+            </table>
+            <form role="form">
+                <div class="form-group">
+                    <label for="festival_input">도시 코드</label>
+                    <input type="number" id="festival_city_input" class="form-control">
+                    <small class="form-text form-muted">도시코드를 번호를 입력해주세요.</small>
+                </div>
+                <div class="form-group">
+                    <textarea id="festival_output" class="form-control" rows="10" readonly="true"></textarea>
+                    <button class="btn btn-primary btn-block" type="button" onclick="getFestivalInfo()">API 모의 요청 및 결과
+                        확인
+                    </button>
+                </div>
+            </form>
         </div>
-      </div>
-      <div class="col-lg-4 mb-4">
-        <div class="card h-100">
-          <h4 class="card-header">축제/행사/관광지</h4>
-          <div class="card-body">
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ipsam eos, nam perspiciatis natus commodi similique totam consectetur praesentium molestiae atque exercitationem ut consequuntur, sed eveniet, magni nostrum sint fuga.</p>
-          </div>
-          <div class="card-footer">
-            <a href="festival.html" class="btn btn-primary">Learn More</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 mb-4">
-        <div class="card h-100">
-          <h4 class="card-header">병원</h4>
-          <div class="card-body">
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
-          </div>
-          <div class="card-footer">
-            <a href="hospital.html" class="btn btn-primary">Learn More</a>
-          </div>
-        </div>
-      </div>
     </div>
-    <!-- /.row -->
+</div>
 
-  </div>
-  <!-- /.container -->
-
-  <!-- Footer -->
-  <footer class="py-5 bg-dark">
+<!-- Footer -->
+<footer class="py-5 bg-dark">
     <div class="container">
-      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2020</p>
+        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2020</p>
     </div>
     <!-- /.container -->
-  </footer>
+</footer>
 
-  <!-- Bootstrap core JavaScript -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script src="https:ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script type="text/javascript" src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    function getFestivalInfo() {
+        festivalCityCode = document.getElementById('festival_city_input').value
+        var url = 'http://127.0.0.1:5000/festival'
+        if (festivalCityCode!= ""){
+            url = url + '/'  + String(festivalCityCode)
+        }
 
+
+        console.log(url)
+        fetch(url)
+            .then(response => response.text())
+            .then((data) => {
+                document.getElementById('festival_output').value = data
+                console.log(data)
+            })
+    }
+</script>
 </body>
 
 </html>
