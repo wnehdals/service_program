@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+\<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -29,6 +29,7 @@
 <body>
 
 <!-- Navigation -->
+
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
         <a class="navbar-brand" href="index.html">Be a good parents</a>
@@ -46,6 +47,7 @@
         </div>
     </div>
 </nav>
+
 
 <header>
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -92,499 +94,55 @@
     <div class="row">
         <div class="col-lg-4 mb-4">
             <div class="card h-100">
-                <h4 class="card-header">유치원 조회</h4>
+                <h4 class="card-header">유치원 API</h4>
                 <div class="card-body">
-                    <p class="card-text">경기도 내 어린이 유치원의 위치를 보여줍니다.</p>
+                    <p class="card-text">경기도에 위치하는 유치원 정보를 제공하고 있습니다.</p>
                 </div>
                 <div class="card-footer">
-                    <a href="children.html" class="btn btn-primary">확인해보기</a>
+                    <a href="children.html" class="btn btn-primary">API 문서</a>
+                    <a href="children.html" class="btn btn-info">예시</a>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-lg-4 mb-4">
+            <div class="card h-100">
+                <h4 class="card-header">축제/행사 API</h4>
+                <div class="card-body">
+                    <p class="card-text">경기도에 개최하는 축제/행사 정보를 제공하고 있습니다.</p>
+                </div>
+                <div class="card-footer">
+                    <a href="services.html" class="btn btn-primary">API 문서</a>
+                    <a href="festival.html" class="btn btn-info">예시</a>
                 </div>
             </div>
         </div>
         <div class="col-lg-4 mb-4">
             <div class="card h-100">
-                <h4 class="card-header">축제/행사/관광지</h4>
+                <h4 class="card-header">병원 API</h4>
                 <div class="card-body">
-                    <p class="card-text">경기도에서 열리는 다양한 축제, 행사, 관광지 정보를 알려줍니다.</p>
+                    <p class="card-text">경기도에 위치하는 소아전문센터 정보를 제공하고 있습니다.</p>
                 </div>
                 <div class="card-footer">
-                    <a href="festival.html" class="btn btn-primary">확인해보기</a>
+                     <a href="hospital" class="btn btn-primary">API 문서</a>
+                    <a href="hospital" class="btn btn-info">예시</a>
                 </div>
             </div>
         </div>
         <div class="col-lg-4 mb-4">
             <div class="card h-100">
-                <h4 class="card-header">병원</h4>
+                <h4 class="card-header">검색 API</h4>
                 <div class="card-body">
-                    <p class="card-text">현재 위치를 기반으로 한 주변 달빛어린이병원, 소아전문센터의 위치를 알려줍니다.</p>
+                    <p class="card-text">경기도에 위치하는 소아전문센터/축제/행사/유치원 정보를 제공하고 있습니다.</p>
                 </div>
                 <div class="card-footer">
-                    <a href="hospital" class="btn btn-primary">확인해보기</a>
+                     <a href="hospital" class="btn btn-primary">API 문서</a>
+                    <a href="hospital" class="btn btn-info">예시</a>
                 </div>
             </div>
         </div>
     </div>
     <!-- /.row -->
-
-
-    <h2 class="my-4">API를 사용하기 위한 명세서를 아래에서 확인할 수 있습니다.</h2>
-    <div class="row">
-        <div class="col-lg-12 my-4">
-            <h3>유치원</h3>
-            <h5>요청 변수</h5>
-            <table class="table">
-                <thead class="thead-light">
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">항목명</th>
-                    <th scope="col">항목구분</th>
-                    <th scope="col">항목설명</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>pageNum</td>
-                    <td>필수</td>
-                    <td>페이지 번호</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>sggCode</td>
-                    <td>선택</td>
-                    <td>시군구 코드</td>
-                </tr>
-                </tbody>
-            </table>
-            <h5>응답 형식</h5>
-            <table class="table">
-                <thead class="thead-light">
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">항목명</th>
-                    <th scope="col">항목구분</th>
-                    <th scope="col">항목설명</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>title</td>
-                    <td>필수</td>
-                    <td>유치원 이름</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>overview</td>
-                    <td>필수</td>
-                    <td>유치원 주소</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>telNo</td>
-                    <td>필수</td>
-                    <td>연락처</td>
-                </tr>
-                <tr>
-                    <th scope="row">4</th>
-                    <td>hpAddr</td>
-                    <td>선택</td>
-                    <td>홈페이지 주소</td>
-                </tr>
-                <tr>
-                    <th scope="row">5</th>
-                    <td>childNo</td>
-                    <td>필수</td>
-                    <td>총 유아 수</td>
-                </tr>
-                </tbody>
-            </table>
-            <form role="form">
-                <div class="form-group">
-                    <label for="festival_input">페이지 번호</label>
-                    <input type="text" id="children_input1" class="form-control" placeholder="pageNum">
-                    <small class="form-text form-muted">유치원의 페이지 번호를 입력해주세요.</small>
-                </div>
-                <div class="form-group">
-                    <label for="festival_input">시군구 코드</label>
-                    <input type="text" id="children_input2" class="form-control" placeholder="sggCode">
-                    <small class="form-text form-muted">유치원의 시군구 코드를 입력해주세요.</small>
-                </div>
-                <div class="form-group">
-                    <textarea class="form-control" id="children_output" rows="10" readonly="true"></textarea>
-                    <button class="btn btn-primary btn-block" type="button" onclick="getChildrenInfo()">API 모의 요청 및 결과 확인</button>
-                </div>
-            </form>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-12 my-4">
-            <h3>축제/행사</h3>
-            <ht>http://127.0.0.1:5000/festival/{pageNum}/{cityCode}</ht>
-            <h4>요청 형식</h4>
-            <table class="table">
-                <thead class="thead-light">
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">항목명</th>
-                    <th scope="col">항목구분</th>
-                    <th scope="col">항목설명</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>pageNum</td>
-                    <td>필수</td>
-                    <td>페이지 번호</td>
-                </tr>
-                 <tr>
-                    <th scope="row">1</th>
-                    <td>pageNum</td>
-                    <td>필수</td>
-                    <td>도시 코드</td>
-                </tr>
-                </tbody>
-            </table>
-            <h4>응답 형식</h4>
-            <table class="table">
-                <thead class="thead-light">
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">항목명</th>
-                    <th scope="col">항목구분</th>
-                    <th scope="col">항목설명</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>title</td>
-                    <td>필수</td>
-                    <td>축제/행사 이름</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>img</td>
-                    <td>필수</td>
-                    <td>대표사진</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>contentId</td>
-                    <td>필수</td>
-                    <td>id</td>
-                </tr>
-                <tr>
-                    <th scope="row">4</th>
-                    <td>overview</td>
-                    <td>필수</td>
-                    <td>축제/행사 내용</td>
-                </tr>
-                <tr>
-                    <th scope="row">5</th>
-                    <td>startDate</td>
-                    <td>필수</td>
-                    <td>축제/행사 시작일</td>
-                </tr>
-                <tr>
-                    <th scope="row">6</th>
-                    <td>endDate</td>
-                    <td>필수</td>
-                    <td>축제/행사 마감일</td>
-                </tr>
-                <tr>
-                    <th scope="row">6</th>
-                    <td>addr</td>
-                    <td>필수</td>
-                    <td>주소</td>
-                </tr>
-                </tbody>
-            </table>
-            <form role="form">
-                <div class="form-group">
-                    <label for="festival_input">페이지 번호</label>
-                    <input type="number" id="festival_input" class="form-control" placeholder="1">
-                    <small class="form-text form-muted">축제, 행사 목록의 페이지 번호를 입력해주세요.</small>
-                    <label for="festival_input">도시 코드</label>
-                    <input type="number" id="festival_city_input" class="form-control" placeholder="1">
-                    <small class="form-text form-muted">도시코드를 번호를 입력해주세요.</small>
-                </div>
-                <div class="form-group">
-                    <textarea id="festival_output" class="form-control" rows="10" readonly="true"></textarea>
-                    <button class="btn btn-primary btn-block" type="button" onclick="getFestivalInfo()">API 모의 요청 및 결과 확인</button>
-                </div>
-            </form>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-12 my-4">
-            <h3>병원</h3>
-            <h4>요청 URL</h4>
-            <div>
-                <p class="lead" style="font-weight:400;">
-                    /hospital/requestv2/&lt;major_address&gt;/&lt;minor_address&gt;
-                </p>
-            </div>
-            <h4>요청 형식</h4>
-            <table class="table">
-                <thead class="thead-light">
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">항목명</th>
-                    <th scope="col">항목구분</th>
-                    <th scope="col">항목설명</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>address_major</td>
-                    <td>필수</td>
-                    <td>병원을 검색하고자 하는 위치의 도 이름입니다. ex) 충청북도, 경기도</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>address_minor</td>
-                    <td>필수</td>
-                    <td>병원을 검색하고자 하는 위치의 시군구 이름입니다. ex) 청주시, 성남시</td>
-                </tr>
-                </tbody>
-            </table>
-            <h4>응답 형식</h4>
-            <div class="modal fade" id="hospital_level_model" tabindex="-1" role="dialog" aria-labelledby="hospital_level_model" aria-hidden="true">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">병원 등급</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                    <ul>
-                        <li>A[상급종합병원, 종합병원]</li>
-                        <li>B[병원, 군 병원]</li>
-                        <li>C[의원,군 의원]</li>
-                        <li>D[요양병원]</li>
-                        <li>E[한방병원]</li>
-                        <li>G[한의원,군 한의원]</li>
-                        <li>H[약국]</li>
-                        <li>I[기타]</li>
-                        <li>M[치과병원]</li>
-                        <li>N[치과의원]</li>
-                        <li>R[보건소, 보건지소, 보건진료소, 보건의료원, S이송단체]</li>
-                        <li>T[119구급대]</li>
-                        <li>U[경찰서(교도소포함)]</li>
-                        <li>V[지방자치단체]</li>
-                        <li>W[기타시설, 군 기타]</li>
-                        <li>Y[중앙응급의료센터]</li>
-                        <li>Z[응급의료지원센터]</li>
-                    </ul>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <table class="table">
-                <thead class="thead-light">
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">항목명</th>
-                    <th scope="col">예시</th>
-                    <th scope="col">항목설명</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>status</td>
-                    <td>true</td>
-                    <td>달빛어린이병원 API 요청이 잘 전송되어 데이터를 얻을 수 있었는지 나타냅니다.</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>hospital_list</td>
-                    <td>list&lt;dictionary&gt;</td>
-                    <td>달빛어린이병원 API 요청으로 받은 병원들의 정제된 데이터입니다.</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>hospital_list.address</td>
-                    <td>2.66</td>
-                    <td>해당 병원의 주소입니다.</td>
-                </tr>
-                <tr>
-                    <th scope="row">4</th>
-                    <td>hospital_list.level</td>
-                    <td>의원</td>
-                    <td>공공 API에서 <a href="#" data-toggle="modal" data-target="#hospital_level_model">규정</a>한 병원의 등급입니다.</td>
-                </tr>
-                <tr>
-                    <th scope="row">5</th>
-                    <td>hospital_list.emergency_code_name</td>
-                    <td>응급의료기관 이외</td>
-                    <td>해당 병원의 응급의료기관코드명입니다.</td>
-                </tr>
-                <tr>
-                    <th scope="row">6</th>
-                    <td>hospital_list.emergency_room_available</td>
-                    <td>true</td>
-                    <td>해당 병원에서 응급실을 운영하고 있는지 여부입니다.</td>
-                </tr>
-                <tr>
-                    <th scope="row">7</th>
-                    <td>hospital_list.information</td>
-                    <td>운천내과와 주,야간 교대근무/주간:식도가시제거/수액○/사후피임약처방○/독감간이검사X</td>
-                    <td>해당 병원에 대한 상세한 설명입니다.</td>
-                </tr>
-                <tr>
-                    <th scope="row">8</th>
-                    <td>hospital_list.information_etc</td>
-                    <td>평일 18:00 ~ 23:00 토요일 일요일 및 공휴일 09:00 ~ 23:00 8월 14일 최신화</td>
-                    <td>해당 병원 정보의 비고 항목입니다.</td>
-                </tr>
-                <tr>
-                    <th scope="row">9</th>
-                    <td>hospital_list.address_alias</td>
-                    <td>진양아파트 맞은편</td>
-                    <td>해당 병원의 추가적인 위치 정보입니다.</td>
-                </tr>
-                <tr>
-                    <th scope="row">10</th>
-                    <td>hospital_list.name</td>
-                    <td>손범수달빛의원</td>
-                    <td>해당 병원의 이름입니다.</td>
-                </tr>
-                <tr>
-                    <th scope="row">11</th>
-                    <td>hospital_list.contact</td>
-                    <td>02-459-0119</td>
-                    <td>해당 병원의 대표전화입니다.</td>
-                </tr>
-                <tr>
-                    <th scope="row">12</th>
-                    <td>hospital_list.latitude</td>
-                    <td>36.65073962093224</td>
-                    <td>해당 병원의 위도입니다.</td>
-                </tr>
-                <tr>
-                    <th scope="row">13</th>
-                    <td>hospital_list.longitude</td>
-                    <td>127.47431470458069</td>
-                    <td>해당 병원의 경도입니다.</td>
-                </tr>
-                <tr>
-                    <th scope="row">14</th>
-                    <td>hospital_list.start_time_mon</td>
-                    <td>1800</td>
-                    <td>해당 병원의 월요일 영업 시작시간입니다.</td>
-                </tr>
-                <tr>
-                    <th scope="row">15</th>
-                    <td>hospital_list.close_time_mon</td>
-                    <td>2300</td>
-                    <td>해당 병원의 월요일 영업 종료시간입니다.</td>
-                </tr>
-                <tr>
-                    <th scope="row">16</th>
-                    <td>hospital_list.start_time_tue</td>
-                    <td>1800</td>
-                    <td>해당 병원의 화요일 영업 시작시간입니다.</td>
-                </tr>
-                <tr>
-                    <th scope="row">17</th>
-                    <td>hospital_list.close_time_tue</td>
-                    <td>2300</td>
-                    <td>해당 병원의 화요일 영업 종료시간입니다.</td>
-                </tr>
-                <tr>
-                    <th scope="row">18</th>
-                    <td>hospital_list.start_time_wed</td>
-                    <td>1800</td>
-                    <td>해당 병원의 수요일 영업 시작시간입니다.</td>
-                </tr>
-                <tr>
-                    <th scope="row">19</th>
-                    <td>hospital_list.close_time_wed</td>
-                    <td>2300</td>
-                    <td>해당 병원의 수요일 영업 종료시간입니다.</td>
-                </tr>
-                <tr>
-                    <th scope="row">20</th>
-                    <td>hospital_list.start_time_thu</td>
-                    <td>1800</td>
-                    <td>해당 병원의 목요일 영업 시작시간입니다.</td>
-                </tr>
-                <tr>
-                    <th scope="row">21</th>
-                    <td>hospital_list.close_time_thu</td>
-                    <td>2300</td>
-                    <td>해당 병원의 목요일 영업 종료시간입니다.</td>
-                </tr>
-                <tr>
-                    <th scope="row">22</th>
-                    <td>hospital_list.start_time_fri</td>
-                    <td>1800</td>
-                    <td>해당 병원의 금요일 영업 시작시간입니다.</td>
-                </tr>
-                <tr>
-                    <th scope="row">23</th>
-                    <td>hospital_list.close_time_fri</td>
-                    <td>2300</td>
-                    <td>해당 병원의 금요일 영업 종료시간입니다.</td>
-                </tr>
-                <tr>
-                    <th scope="row">24</th>
-                    <td>hospital_list.start_time_sat</td>
-                    <td>0900</td>
-                    <td>해당 병원의 토요일 영업 시작시간입니다.</td>
-                </tr>
-                <tr>
-                    <th scope="row">25</th>
-                    <td>hospital_list.close_time_sat</td>
-                    <td>2300</td>
-                    <td>해당 병원의 토요일 영업 종료시간입니다.</td>
-                </tr>
-                <tr>
-                    <th scope="row">26</th>
-                    <td>hospital_list.start_time_sun</td>
-                    <td>0900</td>
-                    <td>해당 병원의 일요일 영업 시작시간입니다.</td>
-                </tr>
-                <tr>
-                    <th scope="row">27</th>
-                    <td>hospital_list.close_time_sun</td>
-                    <td>2300</td>
-                    <td>해당 병원의 일요일 영업 종료시간입니다.</td>
-                </tr>
-                </tbody>
-            </table>
-            <h4>API 모의 요청</h4>
-            <div class="form-group">
-                <form role="form">
-                    <div class="form-group">
-                        <label for="hospital_input_major_address">도명</label>
-                        <input type="text" id="hospital_input_major_address" class="form-control" placeholder="도" value="서울특별시">
-                        <small class="form-text text-muted">병원 탐색을 위한 주소를 입력해주세요.</small>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="hospital_input_minor_address">시군구명</label>
-                        <input type="text" id="hospital_input_minor_address" class="form-control" placeholder="시군구" value="강남구">
-                        <small class="form-text text-muted">병원 탐색을 위한 상세주소를 입력해주세요.</small>
-                    </div>
-
-                    <div class="form-group">
-                        <textarea class="form-control" id="hospital_output" rows="10" readonly="true"></textarea>
-                        <button class="btn btn-primary btn-block" type="button" onclick="getHospitalInfo()">API 모의 요청 및 결과 확인</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
 
 
 </div>
@@ -605,24 +163,25 @@
     function getFestivalInfo() {
         festivalPageNum = document.getElementById('festival_input').value
         festivalCityCode = document.getElementById('festival_city_input').value
-        if(festivalPageNum == "") festivalPageNum = 1
-        if(festivalCityCode == "") festivalCityCode = ""
         console.log(festivalPageNum)
-        var url = 'http://127.0.0.1:5000/festival/' + String(festivalPageNum) +"/"+ String(festivalCityCode)
+        var url = 'http://127.0.0.1:5000/festival/' + String(festivalPageNum) + "/" + String(festivalCityCode)
         console.log(url)
         fetch(url)
             .then(response => response.text())
             .then((data) => {
-                    document.getElementById('festival_output').value = data
-                    console.log(data)
+                document.getElementById('festival_output').value = data
+                console.log(data)
             })
     }
 
-    function getHospitalInfo(){
-        major = document.getElementById('hospital_input_major_address').value
-        minor = document.getElementById('hospital_input_minor_address').value
+    function getHospitalInfo() {
+        longitude = document.getElementById('hospital_input_longitude').value
+        latitude = document.getElementById('hospital_input_latitude').value
 
-        hospitalInfoRequestURL = '/hospital/requestv2/' + major + '/' + minor
+        if (longitude == "") longitude = "127.0851566"
+        if (latitude == "") latitude = "37.48813256"
+
+        hospitalInfoRequestURL = '/hospital/request/' + longitude + '/' + latitude
 
         fetch(hospitalInfoRequestURL).then(response => response.text()).then((data) => {
             document.getElementById('hospital_output').value = data
@@ -640,8 +199,8 @@
         fetch(url)
             .then(response => response.text())
             .then((data) => {
-                    document.getElementById('children_output').value = data
-                    console.log(data)
+                document.getElementById('children_output').value = data
+                console.log(data)
             })
 
     }
