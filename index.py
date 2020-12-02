@@ -60,6 +60,11 @@ def hospital_request(longitude, latitude):
     return hospital_demo.response_hospital_info(longitude, latitude)
 
 
+@app.route('/hospital/requestv2/<major>/<minor>', methods=['GET'])
+def hospital_request_v2(major, minor):
+    return hospital_demo.response_hospital_info_v2(major, minor)
+
+
 @app.route('/hospital')
 def hospital():
     # return render_template('hospital.html')
