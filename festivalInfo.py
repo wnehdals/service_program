@@ -1,5 +1,4 @@
 from flask import Flask, request, jsonify, render_template
-import hospital_demo
 import requests
 import json
 import re

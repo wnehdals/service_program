@@ -57,7 +57,7 @@ def festival(pageNum=1):
     return festivalInfo.festival()
 
 
-@app.route('/hospital/request/<longitude>/<latitude>', methods=['GET'])
+@app.route('/hospital/request/lonlat/<longitude>/<latitude>', methods=['GET'])
 def hospital_request_lonlat(longitude, latitude):
     return hospital.response_hospital_info_lonlat(longitude, latitude)
 
