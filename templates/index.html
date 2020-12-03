@@ -85,66 +85,88 @@
     </div>
 </header>
 
-<!-- Page Content -->
-<div class="container">
+<div class="container-fluid" style="background-image: url('https://wallpapercave.com/wp/wp3430488.jpg');">
+    <div class="container" style="background-color:rgba(255, 255, 255, 0.7);">
+        <div class="row mt-5 mb-5" style="align-items: center;">
+          <div class="col-sm">
+            <h2 class="my-4">저희 API가 사용하는 세부 API들입니다.</h2>
+              <p class="my-2 font-italic h4" style="line-height:inherit;">공공 데이터 포털과 지자체에서 제공하는 API를 사용하여 <mark>유치원, 행사, 병원 정보</mark>를
+                  얻어오고 있습니다.</p>
+          </div>
 
-    <h2 class="my-4">저희 API가 사용하는 세부 API들입니다.</h2>
+          <div class="col-sm-4">
+              <div id="api_carousel" class="carousel slide" data-ride="carousel">
+                  <div class="carousel-inner" style="height:210px;">
+                      <div class="carousel-item active">
+                            <div class="card">
+                                <h4 class="card-header">유치원 API</h4>
+                                <div class="card-body">
+                                    <p class="card-text">경기도에 위치하는 유치원 정보를 제공하고 있습니다.</p>
+                                </div>
+                                <div class="card-footer">
+                                    <a href="children.html" class="btn btn-primary">API 문서</a>
+                                    <a href="children.html" class="btn btn-info">예시</a>
+                                </div>
+                            </div>
 
-    <!-- Marketing Icons Section -->
-    <div class="row">
-        <div class="col-lg-4 mb-4">
-            <div class="card h-100">
-                <h4 class="card-header">유치원 API</h4>
-                <div class="card-body">
-                    <p class="card-text">경기도에 위치하는 유치원 정보를 제공하고 있습니다.</p>
-                </div>
-                <div class="card-footer">
-                    <a href="children.html" class="btn btn-primary">API 문서</a>
-                    <a href="children.html" class="btn btn-info">예시</a>
-                </div>
+                      </div>
+                      <div class="carousel-item">
 
-            </div>
+                            <div class="card">
+                                <h4 class="card-header">축제/행사 API</h4>
+                                <div class="card-body">
+                                    <p class="card-text">경기도에 개최하는 축제/행사 정보를 제공하고 있습니다.</p>
+                                </div>
+                                <div class="card-footer">
+                                    <a href="services.html" class="btn btn-primary">API 문서</a>
+                                    <a href="festival.html" class="btn btn-info">예시</a>
+                                </div>
+                            </div>
+                      </div>
+                      <div class="carousel-item">
+                              <div class="card">
+                                <h4 class="card-header">병원 API</h4>
+                                <div class="card-body">
+                                    <p class="card-text">경기도에 위치하는 소아전문센터 정보를 제공하고 있습니다.</p>
+                                </div>
+                                <div class="card-footer">
+                                    <a href="/hospital/doc" class="btn btn-primary">API 문서</a>
+                                    <a href="/hospital/demo" class="btn btn-info">예시</a>
+                                </div>
+                              </div>
+                      </div>
+                  </div>
+                  <a class="carousel-control-prev" style="width:fit-content;" href="#api_carousel" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" style="background-color:black; border: 1px solid black; border-radius: 10px;" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                  </a>
+                  <a class="carousel-control-next" style="width:fit-content;" href="#api_carousel" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" style="background-color:black; border: 1px solid black; border-radius: 10px;" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                  </a>
+              </div>
+          </div>
         </div>
-        <div class="col-lg-4 mb-4">
-            <div class="card h-100">
-                <h4 class="card-header">축제/행사 API</h4>
-                <div class="card-body">
-                    <p class="card-text">경기도에 개최하는 축제/행사 정보를 제공하고 있습니다.</p>
-                </div>
-                <div class="card-footer">
-                    <a href="services.html" class="btn btn-primary">API 문서</a>
-                    <a href="festival.html" class="btn btn-info">예시</a>
-                </div>
+
+        <div class="row mt-5 mb-5" style="align-items: center;">
+            <div class="col-sm">
+                <h2 class="my-4">이 API들을 기반으로 개발한 저희 API입니다.</h2>
+                <p class="my-2 font-italic h4" style="line-height: inherit;">API로 수집한 데이터들을 정제, 통합하여 json으로 제공합니다.</p>
             </div>
-        </div>
-        <div class="col-lg-4 mb-4">
-            <div class="card h-100">
-                <h4 class="card-header">병원 API</h4>
-                <div class="card-body">
-                    <p class="card-text">경기도에 위치하는 소아전문센터 정보를 제공하고 있습니다.</p>
-                </div>
-                <div class="card-footer">
-                     <a href="/hospital/doc" class="btn btn-primary">API 문서</a>
-                    <a href="/hospital/demo" class="btn btn-info">예시</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 mb-4">
-            <div class="card h-100">
-                <h4 class="card-header">검색 API</h4>
-                <div class="card-body">
-                    <p class="card-text">경기도에 위치하는 소아전문센터/축제/행사/유치원 정보를 제공하고 있습니다.</p>
-                </div>
-                <div class="card-footer">
-                     <a href="hospital" class="btn btn-primary">API 문서</a>
-                    <a href="hospital" class="btn btn-info">예시</a>
+            <div class="col-sm-4">
+                <div class="card h-100">
+                    <h4 class="card-header">검색 API</h4>
+                    <div class="card-body">
+                        <p class="card-text">경기도에 위치하는 소아전문센터/축제/행사/유치원 정보를 제공하고 있습니다.</p>
+                    </div>
+                    <div class="card-footer">
+                         <a href="hospital" class="btn btn-primary">API 문서</a>
+                        <a href="hospital" class="btn btn-info">예시</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- /.row -->
-
-
 </div>
 <!-- /.container -->
 
