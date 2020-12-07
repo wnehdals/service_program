@@ -69,6 +69,10 @@ def festival(pageNum=1):
 def hospital_request_lonlat(longitude, latitude):
     return hospital.response_hospital_info_lonlat(longitude, latitude)
 
+@app.route('/hospital/request/address/<major>')
+def hospital_request_address_majoronly(major):
+    return hospital.response_hospital_info_address(major)
+
 
 @app.route('/hospital/request/address/<major>/<minor>', methods=['GET'])
 def hospital_request_address(major, minor):
