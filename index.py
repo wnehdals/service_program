@@ -26,15 +26,23 @@ def service():
 
 
 
-@app.route('/children')
-@app.route('/children/<pageNum>', methods=['GET'])
-def getChildren(pageNum=1):
-    return kinderInfo.getChildren(pageNum)
+@app.route('/children/<cityCode>')
+@app.route('/children/<cityCode>/<pageNum>', methods=['GET'])
+def getChildren(cityCode, pageNum=1):
+    return kinderInfo.getChildren(cityCode, pageNum)
 
-@app.route('/children.html/<pageNum>')
+@app.route('/children_doc.html')
+def children_doc():
+    return render_template('children_doc.html')
+
+@app.route('/children.html/<cityCode>/<pageNum>')
 @app.route('/children.html', methods=['GET'])
 def children(pageNum=1):
     return kinderInfo.info()
+
+@app.route('/children')
+def getKinder():
+    return kinderInfo.getErrorChildren()
 
 @app.errorhandler(404)
 def not_found(error):

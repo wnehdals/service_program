@@ -1,8 +1,16 @@
 from flask import Flask, request, jsonify, render_template
 import requests
 import json
+import Response
 
-def getChildren(pageNum=1):
+def getErrorChildren():
+    response = Response.Response(400).getResponse()
+
+    jsonVal = json.dumps(response, ensure_ascii=False, indent=4)
+
+    return jsonVal
+
+def getChildren(cityCode=41190, pageNum=1):
     host = 'https://e-childschoolinfo.moe.go.kr/api/notice/basicInfo.do'
 
     para = {'key': 'b65bc721a0d74ff3a210500ab06563bf',
@@ -11,7 +19,20 @@ def getChildren(pageNum=1):
               'pageCnt': '11',
               'currentPage': '1'}
 
+    para['sggCode'] = cityCode
     para['currentPage'] = pageNum
+
+    tmp_para = {'key': 'b65bc721a0d74ff3a210500ab06563bf',
+              'sidoCode': '41',
+              'sggCode': '41190',}
+    tmp_para['sggCode'] = cityCode
+    tmp_data1 = requests.get(host, params=tmp_para).json()
+    tmp_data2 = tmp_data1['kinderInfo']
+    totalCnt = tmp_data2[-1]['key']
+    print(totalCnt)
+
+    para['pageCnt'] = int(totalCnt) // 12
+    print(para['pageCnt'])
 
     res = requests.get(host, params=para).json()
 
@@ -21,20 +42,15 @@ def getChildren(pageNum=1):
     lst1 = []
     for i in kinder:
         lst1.append(i['kindername'])
-
     lst2 = []
     for i in kinder:
         lst2.append(i['addr'])
-
     lst3 = []
     for i in kinder:
         lst3.append(i['telno'])
-
     lst4 = []
     for i in kinder:
         lst4.append(i['hpaddr'])
-    #print(lst4)
-
     lst5 = []
     for i in kinder:
         a = 0
@@ -51,7 +67,7 @@ def getChildren(pageNum=1):
 
         lst5.append(a)
 
-    for i in range(11):
+    for i in range(para['pageCnt']):
         children = dict(title="", overview="", telNo="", hpAddr="")
         children['title'] = lst1[i]
         children['overview'] = lst2[i]
@@ -59,7 +75,10 @@ def getChildren(pageNum=1):
         children['hpAddr'] = lst4[i]
         children['childNo'] = lst5[i]
         list.append(children)
-    jsonVal = json.dumps(list, ensure_ascii=False, indent=4)
+    response = Response.Response(200)
+    response.setBody(list)
+    response = response.getResponse()
+    jsonVal = json.dumps(response, ensure_ascii=False, indent=4)
     return jsonVal
 
 def info(pageNum=1):
