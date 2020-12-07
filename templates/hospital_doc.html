@@ -76,6 +76,12 @@
                     <td>필수</td>
                     <td>병원을 검색하고자 하는 위치의 시군구 이름입니다. ex) 청주시, 성남시</td>
                 </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>item_count</td>
+                    <td>선택</td>
+                    <td>대상 병원 목록의 최대 길이 제한입니다. ex) 5, 10</td>
+                </tr>
                 </tbody>
             </table>
             <h4>응답 형식</h4>
@@ -304,6 +310,12 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="hospital_input_minor_address">시군구명</label>
+                        <input type="text" id="hospital_input_item_count" class="form-control" placeholder="갯수" value="">
+                        <small class="form-text text-muted">병원 목록 최대 제한을 입력해주세요(선택사항).</small>
+                    </div>
+
+                    <div class="form-group">
                         <textarea class="form-control" id="hospital_output" rows="10" readonly="true"></textarea>
                         <button class="btn btn-primary btn-block" type="button" onclick="getHospitalInfo()">API 모의 요청 및 결과 확인</button>
                     </div>
@@ -330,8 +342,10 @@
     function getHospitalInfo(){
         major = document.getElementById('hospital_input_major_address').value
         minor = document.getElementById('hospital_input_minor_address').value
+        limit = document.getElementById('hospital_input_item_count').value
 
-        hospitalInfoRequestURL = '/hospital/request/address/' + major + '/' + minor
+        hospitalInfoRequestURL = '/hospital/request/all/address/' + major + '/' + minor + '/' + limit
+        console.log(hospitalInfoRequestURL)
 
         fetch(hospitalInfoRequestURL).then(response => response.text()).then((data) => {
             document.getElementById('hospital_output').value = data

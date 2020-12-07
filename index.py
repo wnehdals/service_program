@@ -1,10 +1,8 @@
 from flask import Flask, request, jsonify, render_template
-import hospital
-import requests
-import json
-import re
-import festivalInfo
-import kinderInfo
+import hospital, festivalInfo, kinderInfo
+import requests, json, re
+from CityCode import CityCode
+from Response import Response
 
 app = Flask(__name__)
 
@@ -61,14 +59,22 @@ def festival(pageNum=1):
 def hospital_request_lonlat(longitude, latitude):
     return hospital.response_hospital_info_lonlat(longitude, latitude)
 
-@app.route('/hospital/request/address/<major>')
-def hospital_request_address_majoronly(major):
-    return hospital.response_hospital_info_address(major)
-
 
 @app.route('/hospital/request/address/<major>/<minor>', methods=['GET'])
 def hospital_request_address(major, minor):
     return hospital.response_hospital_info_address(major, minor)
+
+
+@app.route('/hospital/request/all/address/<major>/<minor>/', defaults={'item_count': 10}, methods=['GET'])
+@app.route('/hospital/request/all/address/<major>/<minor>/<item_count>/', methods=['GET'])
+def hospital_request_all_address_limit(major, minor, item_count):
+    city_code = CityCode()
+    if minor.isdigit():
+        minor = city_code.get_name(minor)
+        if minor == "-":
+            response = Response(39)
+            return json.dumps(response.getResponse(), ensure_ascii=False, indent=4)
+    return hospital.response_all_hospital_info_address(major, minor, item_count)
 
 
 @app.route('/hospital/demo')
