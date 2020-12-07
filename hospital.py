@@ -14,7 +14,8 @@ def request_api_address(address_major: str, address_minor: str):
     service_url = 'http://apis.data.go.kr/B552657/HsptlAsembySearchService/getBabyListInfoInqire'
     query_params = {"serviceKey": auth_key,
                     "Q0": address_major,
-                    "Q1": address_minor
+                    "Q1": address_minor,
+                    "numOfRows": 1000
                     }
 
     params_url = "?"
