@@ -289,7 +289,26 @@
                 </tr>
                 </tbody>
             </table>
-            <a href="/hospital/demo"><button class="btn btn-primary btn-block mb-3">API 모의 요청결과 확인</button></a>
+            <div class="form-group">
+                <form role="form">
+                    <div class="form-group">
+                        <label for="hospital_input_major_address">도명</label>
+                        <input type="text" id="hospital_input_major_address" class="form-control" placeholder="도" value="서울특별시">
+                        <small class="form-text text-muted">병원 탐색을 위한 주소를 입력해주세요.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="hospital_input_minor_address">시군구명</label>
+                        <input type="text" id="hospital_input_minor_address" class="form-control" placeholder="시군구" value="강남구">
+                        <small class="form-text text-muted">병원 탐색을 위한 상세주소를 입력해주세요.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <textarea class="form-control" id="hospital_output" rows="10" readonly="true"></textarea>
+                        <button class="btn btn-primary btn-block" type="button" onclick="getHospitalInfo()">API 모의 요청 및 결과 확인</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 
@@ -307,7 +326,19 @@
  <!-- Bootstrap core JavaScript -->
   <script src="https:ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script type="text/javascript" src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
+  <script>
+    function getHospitalInfo(){
+        major = document.getElementById('hospital_input_major_address').value
+        minor = document.getElementById('hospital_input_minor_address').value
 
+        hospitalInfoRequestURL = '/hospital/request/address/' + major + '/' + minor
+
+        fetch(hospitalInfoRequestURL).then(response => response.text()).then((data) => {
+            document.getElementById('hospital_output').value = data
+            console.log("job done")
+        })
+    }
+  </script>
 </body>
 
 </html>
