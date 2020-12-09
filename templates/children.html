@@ -288,7 +288,9 @@
   <script type="text/javascript" src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
   <script type="text/javascript">
     function getChildrenInfo(pageNum) {
-        var url = 'http://127.0.0.1:5000/children/41190/' + String(pageNum)
+
+        var url = 'http://127.0.0.1:5000/children/11/' + String(pageNum)
+
         fetch(url)
             .then(response => response.json())
             .then((data) => {
