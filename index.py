@@ -99,6 +99,18 @@ def hospital_request_all_address_limit(major, minor, item_count):
     return hospital.response_all_hospital_info_address(major, minor, item_count)
 
 
+@app.route('/hospital/<code>/', methods=['GET'])
+def hospital_request_simple(code):
+    city_code = CityCode()
+    if code.isdigit():
+        city_name = city_code.get_name(code)
+        if city_name != "-":
+            return hospital.response_all_hospital_info_address("경기도", city_name, 10)
+    
+    response = Response(39)
+    return json.dumps(response.getResponse(), ensure_ascii=False, indent=4)
+
+
 @app.route('/hospital/demo')
 def hospital_demo():
     return hospital.demo()
