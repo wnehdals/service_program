@@ -76,48 +76,33 @@ def request_api_lonlat(longitude: float, latitude: float):
 
 
 def demo():
-    response_raw = request_api_lonlat(127.0851566, 37.48813256)
-    response_raw_tree = ET.fromstring(response_raw.text)
+    response_raw = response_all_hospital_info_address("경기도", "성남시", 10)
+    response_constructed = json.loads(response_raw)
 
-    body_tree = response_raw_tree.find("body")
     hospital_list = []
-    if body_tree is not None:
-        items_tree = body_tree.find("items")
-        if items_tree is not None:
-            for item in items_tree:
-                hospital = {}
+    if response_constructed['header'] is None or response_constructed['body'] is None:
+        hospital_list.append(Hospital_v2())
+        return hospital_list
 
-                for information in item:
-                    if information.tag == "distance":
-                        hospital["distance"] = information.text
-                    elif information.tag == "dutyAddr":
-                        hospital["address"] = information.text
-                    elif information.tag == "dutyDiv":
-                        hospital["level"] = information.text
-                    elif information.tag == "dutyDivName":
-                        hospital["facility"] = information.text
-                    elif information.tag == "dutyEmcls":
-                        hospital["emergency_code"] = information.text
-                    elif information.tag == "dutyFax":
-                        hospital["fax_number"] = information.text
-                    elif information.tag == "dutyLvkl":
-                        hospital["status"] = information.text
-                    elif information.tag == "dutyName":
-                        hospital["name"] = information.text
-                    elif information.tag == "dutyTel1":
-                        hospital["contact"] = information.text
-                    elif information.tag == "endTime":
-                        hospital["end_time"] = information.text
-                    elif information.tag == "hpid":
-                        hospital["hospital_id"] = information.text
-                    elif information.tag == "latitude":
-                        hospital["latitude"] = information.text
-                    elif information.tag == "longitude":
-                        hospital["longitude"] = information.text
-                    elif information.tag == "startTime":
-                        hospital["start_time"] = information.text
+    if response_constructed['header']['resultCode'] != "200":
+        hospital_list.append(Hospital_v2())
+        return hospital_list
 
-                hospital_list.append(hospital)
+    for hospital_result in response_constructed['body']:
+        hospital_instance = Hospital_v2()
+        hospital_instance.information = hospital_result['information']
+        hospital_instance.information_etc = hospital_result['information_etc']
+        hospital_instance.address = hospital_result['address']
+        hospital_instance.address_alias = hospital_result['address_alias']
+        hospital_instance.name = hospital_result['name']
+        hospital_instance.contact = hospital_result['contact']
+        hospital_instance.level = hospital_result['level']
+        hospital_instance.emergency_code_name = hospital_result['emergency_code_name']
+        hospital_instance.emergency_room_available = hospital_result['emergency_room_available']
+        hospital_instance.latitude = hospital_result['latitude']
+        hospital_instance.longitude = hospital_result['longitude']
+
+        hospital_list.append(hospital_instance)
 
     if len(hospital_list) == 0:
         hospital_list.append(Hospital())
@@ -298,21 +283,21 @@ def response_all_hospital_info_address(address_major: str, address_minor: str, i
 
                 for information in item:
                     if information.tag == "dutyAddr":
-                        hospital.address = information.text
+                        hospital.address = information.text.replace('\n', ' ')
                     elif information.tag == "dutyDivNam":
-                        hospital.level = information.text
+                        hospital.level = information.text.replace('\n', ' ')
                     elif information.tag == "dutyEmclsName":
-                        hospital.emergency_code_name = information.text
+                        hospital.emergency_code_name = information.text.replace('\n', ' ')
                     elif information.tag == "dutyEryn":
                         hospital.emergency_room_available = (True if information.text is "2" else False)
                     elif information.tag == "dutyInf":
-                        hospital.information = information.text
+                        hospital.information = information.text.replace('\n', ' ')
                     elif information.tag == "dutyEtc":
-                        hospital.information_etc = information.text
+                        hospital.information_etc = information.text.replace('\n', ' ')
                     elif information.tag == "dutyMapimg":
-                        hospital.address_alias = information.text
+                        hospital.address_alias = information.text.replace('\n', ' ')
                     elif information.tag == "dutyName":
-                        hospital.name = information.text
+                        hospital.name = information.text.replace('\n', ' ')
                     elif information.tag == "dutyTel1":
                         hospital.contact = information.text
                     elif information.tag == "wgs84Lat":
