@@ -23,24 +23,45 @@ def service():
     return render_template('services.html')
 
 
+@app.route('/children/<city>', methods=['GET'])
+def get_children(city):
+    if int(city) > 0 or int(city) < 32:
+        return kinderInfo.getChildren(city)
+    return kinderInfo.getErrorChildren()
+
+
+@app.route('/children/<cityCode>')
+@app.route('/children/<cityCode>/<pageNum>', methods=['GET'])
+def getChildren(cityCode, pageNum=1):
+    return kinderInfo.getChildren(cityCode, pageNum)
+
+@app.route('/children_doc.html')
+def children_doc():
+    return render_template('children_doc.html')
+
+@app.route('/children.html/<cityCode>/<pageNum>')
+
+@app.route('/children.html', methods=['GET'])
+def children():
+    return kinderInfo.info()
+
+
 
 @app.route('/children')
-@app.route('/children/<pageNum>', methods=['GET'])
-def getChildren(pageNum=1):
-    return kinderInfo.getChildren(pageNum)
+def get_kinder():
+    return kinderInfo.getErrorChildren()
 
-@app.route('/children.html/<pageNum>')
-@app.route('/children.html', methods=['GET'])
-def children(pageNum=1):
-    return kinderInfo.info()
+
 
 @app.errorhandler(404)
 def not_found(error):
-
     return render_template('404.html')
+
+
 @app.route('/festival')
 def getFestival():
     return festivalInfo.getErrorFestival()
+
 
 @app.route('/festival/<city>', methods=['GET'])
 def getCityFestival(city):
@@ -48,6 +69,7 @@ def getCityFestival(city):
         return festivalInfo.getErrorFestival()
     else:
         return festivalInfo.getFestival(city)
+
 
 @app.route('/festival.html/<city>')
 @app.route('/festival.html', methods=['GET'])
