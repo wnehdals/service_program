@@ -69,6 +69,7 @@ def getChildren(cityCode):
     return jsonVal
 
 def getChildrenPage(cityCode, pageNum):
+
     host = 'https://e-childschoolinfo.moe.go.kr/api/notice/basicInfo.do'
 
     para = {'key': 'b65bc721a0d74ff3a210500ab06563bf',
@@ -77,6 +78,7 @@ def getChildrenPage(cityCode, pageNum):
               'pageCnt': '11',
               'currentPage': '1'
             }
+
 
     para['sggCode'] = getCity(cityCode)
     para['currentPage'] = pageNum
@@ -93,6 +95,7 @@ def getChildrenPage(cityCode, pageNum):
 
     if int(pageNum) <= 0 or int(pageNum) > para['pageCnt']:
         return getErrorChildren()
+
 
     res = requests.get(host, params=para).json()
 

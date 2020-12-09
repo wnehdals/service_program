@@ -32,25 +32,27 @@ def get_children(city):
     return kinderInfo.getErrorChildren()
 
 
-@app.route('/children/<city>/<page>', methods=['GET'])
-def get_children_page(city, page):
-    return kinderInfo.getChildrenPage(city, page)
-
+@app.route('/children/<cityCode>')
+@app.route('/children/<cityCode>/<pageNum>', methods=['GET'])
+def getChildren(cityCode, pageNum=1):
+    return kinderInfo.getChildren(cityCode, pageNum)
 
 @app.route('/children_doc.html')
 def children_doc():
     return render_template('children_doc.html')
 
+@app.route('/children.html/<cityCode>/<pageNum>')
 
-@app.route('/children.html/<city>')
 @app.route('/children.html', methods=['GET'])
 def children():
     return kinderInfo.info()
 
 
+
 @app.route('/children')
 def get_kinder():
     return kinderInfo.getErrorChildren()
+
 
 
 @app.errorhandler(404)
