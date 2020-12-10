@@ -51,12 +51,13 @@
 <div class="container">
 
     <!-- Page Heading/Breadcrumbs -->
-    <h1 class="mt-4 mb-3">유치원 API 상세정보</h1>
+    <h1 class="mt-4 mb-3">검색 API
+    </h1>
 
     <div class="row">
         <div class="col-lg-12 my-4">
             <h4>요청 URL</h4>
-            <ht>URL : http://127.0.0.1:5000/children/{cityCode}</ht>
+            <ht>URL : http://127.0.0.1:5000/search/{cityCode}</ht>
             <h4>요청 형식</h4>
             <table class="table">
                 <thead class="thead-light">
@@ -70,7 +71,7 @@
                 <tbody>
                 <tr>
                     <th scope="row">1</th>
-                    <td>cityCode</td>
+                    <td>pageNum</td>
                     <td>필수</td>
                     <td>도시 코드</td>
                 </tr>
@@ -91,43 +92,55 @@
                     <th scope="row">1</th>
                     <td>title</td>
                     <td>필수</td>
-                    <td>유치원 이름</td>
+                    <td>축제/행사 이름</td>
                 </tr>
                 <tr>
                     <th scope="row">2</th>
-                    <td>overview</td>
+                    <td>img</td>
                     <td>필수</td>
-                    <td>유치원 주소</td>
+                    <td>대표사진</td>
                 </tr>
                 <tr>
                     <th scope="row">3</th>
-                    <td>telNo</td>
+                    <td>contentId</td>
                     <td>필수</td>
-                    <td>연락처</td>
+                    <td>id</td>
                 </tr>
                 <tr>
                     <th scope="row">4</th>
-                    <td>hpAddr</td>
-                    <td>선택</td>
-                    <td>홈페이지 주소</td>
+                    <td>overview</td>
+                    <td>필수</td>
+                    <td>축제/행사 내용</td>
                 </tr>
                 <tr>
                     <th scope="row">5</th>
-                    <td>childNo</td>
+                    <td>startDate</td>
                     <td>필수</td>
-                    <td>총 유아 수</td>
+                    <td>축제/행사 시작일</td>
+                </tr>
+                <tr>
+                    <th scope="row">6</th>
+                    <td>endDate</td>
+                    <td>필수</td>
+                    <td>축제/행사 마감일</td>
+                </tr>
+                <tr>
+                    <th scope="row">6</th>
+                    <td>addr</td>
+                    <td>필수</td>
+                    <td>주소</td>
                 </tr>
                 </tbody>
             </table>
             <form role="form">
                 <div class="form-group">
                     <label for="festival_input">도시 코드</label>
-                    <input type="number" id="children_input1" class="form-control">
-                    <small class="form-text form-muted">도시코드를 입력해주세요.</small>
+                    <input type="number" id="festival_city_input" class="form-control">
+                    <small class="form-text form-muted">도시코드를 번호를 입력해주세요.</small>
                 </div>
                 <div class="form-group">
-                    <textarea id="children_output" class="form-control" rows="10" readonly="true"></textarea>
-                    <button class="btn btn-primary btn-block" type="button" onclick="getChildrenInfo()">API 모의 요청 및 결과
+                    <textarea id="festival_output" class="form-control" rows="10" readonly="true"></textarea>
+                    <button class="btn btn-primary btn-block" type="button" onclick="getFestivalInfo()">API 모의 요청 및 결과
                         확인
                     </button>
                 </div>
@@ -148,21 +161,19 @@
 <script src="https:ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script type="text/javascript" src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript">
-    function getChildrenInfo() {
-        childrenCityCode = document.getElementById('children_input1').value
-        //childrenPageNum = document.getElementById('children_input2').value
-
-        if (childrenCityCode == ""){
-            var url = 'http://127.0.0.1:5000/children'
-        } else{
-            var url = 'http://127.0.0.1:5000/children/' + String(childrenCityCode)
+    function getFestivalInfo() {
+        festivalCityCode = document.getElementById('festival_city_input').value
+        var url = 'http://127.0.0.1:5000/festival'
+        if (festivalCityCode!= ""){
+            url = url + '/'  + String(festivalCityCode)
         }
+
 
         console.log(url)
         fetch(url)
             .then(response => response.text())
             .then((data) => {
-                document.getElementById('children_output').value = data
+                document.getElementById('festival_output').value = data
                 console.log(data)
             })
     }

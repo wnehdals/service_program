@@ -18,6 +18,17 @@ def about():
     return render_template('about.html')
 
 
+@app.route('/search.html')
+def total():
+    return render_template('search.html')
+
+
+#@app.route('/team_five.html/<city>')
+@app.route('/team_five.html', methods=['GET'])
+def team_five():
+    return render_template('team_five.html')
+
+
 @app.route('/services.html')
 def service():
     return render_template('services.html')
@@ -25,32 +36,29 @@ def service():
 
 @app.route('/children/<city>', methods=['GET'])
 def get_children(city):
-    if int(city) > 0 or int(city) < 32:
-        return kinderInfo.getChildren(city)
-    return kinderInfo.getErrorChildren()
+    if int(city) <= 0 or int(city) >= 32:
+        return kinderInfo.getErrorChildren()
+    return kinderInfo.getChildren(city)
 
 
-@app.route('/children/<cityCode>')
-@app.route('/children/<cityCode>/<pageNum>', methods=['GET'])
-def getChildren(cityCode, pageNum=1):
-    return kinderInfo.getChildren(cityCode, pageNum)
+@app.route('/children/<city>/<page>', methods=['GET'])
+def get_children_page(city, page):
+    return kinderInfo.getChildrenPage(city, page)
 
 @app.route('/children_doc.html')
 def children_doc():
     return render_template('children_doc.html')
 
-@app.route('/children.html/<cityCode>/<pageNum>')
 
+@app.route('/children.html/<city>')
 @app.route('/children.html', methods=['GET'])
 def children():
     return kinderInfo.info()
 
 
-
 @app.route('/children')
 def get_kinder():
     return kinderInfo.getErrorChildren()
-
 
 
 @app.errorhandler(404)

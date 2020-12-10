@@ -48,9 +48,59 @@
         <div class="col-lg-12 my-2">
             <h3>병원</h3>
             <h4>요청 URL</h4>
+            <div class="modal fade" id="city_code_modal" tabindex="-1" role="dialog" aria-labelledby="hospital_level_model" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="city_code_modal_title">도시 코드</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <ul>
+                        <li>가평군: 1</li>
+                        <li>고양시: 2</li>
+                        <li>과천시: 3</li>
+                        <li>광명시: 4</li>
+                        <li>광주시: 5</li>
+                        <li>구리시: 6</li>
+                        <li>군포시: 7</li>
+                        <li>김포시: 8</li>
+                        <li>남양주시: 9</li>
+                        <li>동두천시: 10</li>
+                        <li>부천시: 11</li>
+                        <li>성남시: 12</li>
+                        <li>수원시: 13</li>
+                        <li>시흥시: 14</li>
+                        <li>안산시: 15</li>
+                        <li>안성시: 16</li>
+                        <li>안양시: 17</li>
+                        <li>양주시: 18</li>
+                        <li>양평군: 19</li>
+                        <li>여주시: 20</li>
+                        <li>연천군: 21</li>
+                        <li>오산시: 22</li>
+                        <li>용인시: 23</li>
+                        <li>의왕시: 24</li>
+                        <li>의정부시: 25</li>
+                        <li>이천시: 26</li>
+                        <li>파주시: 27</li>
+                        <li>평택시: 28</li>
+                        <li>포천시: 29</li>
+                        <li>하남시: 30</li>
+                        <li>화성시: 31</li>
+                    </ul>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div>
                 <p class="lead" style="font-weight:400;">
-                    /hospital/request/address/&lt;major_address&gt;/&lt;minor_address&gt;
+                    /hospital/&lt;city_code&gt;
                 </p>
             </div>
             <h4>요청 형식</h4>
@@ -64,24 +114,28 @@
                 </tr>
                 </thead>
                 <tbody>
+                <!--
                 <tr>
                     <th scope="row">1</th>
                     <td>address_major</td>
                     <td>필수</td>
                     <td>병원을 검색하고자 하는 위치의 도 이름입니다. ex) 충청북도, 경기도</td>
                 </tr>
+                -->
                 <tr>
-                    <th scope="row">2</th>
+                    <th scope="row">1</th>
                     <td>address_minor</td>
                     <td>필수</td>
-                    <td>병원을 검색하고자 하는 위치의 시군구 이름입니다. ex) 청주시, 성남시</td>
+                    <td>병원을 검색하고자 하는 위치의 시군구의 <a href="#" data-toggle="modal" data-target="#city_code_modal">코드</a>입니다. ex) 12(성남시), 2(고양시)</td>
                 </tr>
+                <!--
                 <tr>
                     <th scope="row">3</th>
                     <td>item_count</td>
                     <td>선택</td>
                     <td>대상 병원 목록의 최대 길이 제한입니다. ex) 5, 10</td>
                 </tr>
+                -->
                 </tbody>
             </table>
             <h4>응답 형식</h4>
@@ -297,26 +351,30 @@
             </table>
             <div class="form-group">
                 <form role="form">
+                    <!--
                     <div class="form-group">
                         <label for="hospital_input_major_address">도명</label>
                         <input type="text" id="hospital_input_major_address" class="form-control" placeholder="도" value="서울특별시">
                         <small class="form-text text-muted">병원 탐색을 위한 주소를 입력해주세요.</small>
                     </div>
+                    -->
 
                     <div class="form-group">
                         <label for="hospital_input_minor_address">시군구명</label>
-                        <input type="text" id="hospital_input_minor_address" class="form-control" placeholder="시군구" value="강남구">
-                        <small class="form-text text-muted">병원 탐색을 위한 상세주소를 입력해주세요.</small>
+                        <input type="text" id="hospital_input_minor_address" class="form-control" placeholder="시군구" value="1">
+                        <small class="form-text text-muted">병원 탐색을 위한 시군구 코드를 입력해주세요.</small>
                     </div>
 
+                    <!--
                     <div class="form-group">
-                        <label for="hospital_input_minor_address">시군구명</label>
+                        <label for="hospital_input_minor_address">최대 갯수 제한</label>
                         <input type="text" id="hospital_input_item_count" class="form-control" placeholder="갯수" value="">
                         <small class="form-text text-muted">병원 목록 최대 제한을 입력해주세요(선택사항).</small>
                     </div>
+                    -->
 
                     <div class="form-group">
-                        <textarea class="form-control" id="hospital_output" rows="10" readonly="true"></textarea>
+                        <textarea class="form-control" id="hospital_output" rows="10" readonly="readonly"></textarea>
                         <button class="btn btn-primary btn-block" type="button" onclick="getHospitalInfo()">API 모의 요청 및 결과 확인</button>
                     </div>
                 </form>
@@ -340,11 +398,11 @@
   <script type="text/javascript" src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
   <script>
     function getHospitalInfo(){
-        major = document.getElementById('hospital_input_major_address').value
+        // major = document.getElementById('hospital_input_major_address').value
         minor = document.getElementById('hospital_input_minor_address').value
-        limit = document.getElementById('hospital_input_item_count').value
+        // limit = document.getElementById('hospital_input_item_count').value
 
-        hospitalInfoRequestURL = '/hospital/request/all/address/' + major + '/' + minor + '/' + limit
+        hospitalInfoRequestURL = '/hospital/' + minor + '/'
         console.log(hospitalInfoRequestURL)
 
         fetch(hospitalInfoRequestURL).then(response => response.text()).then((data) => {
