@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>좋은 부모가 되기 위한 API - Be A Good Parents</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="/static/vendor/bootstrap/css/bootstrap.css">
+
+    <!-- Custom styles for this template -->
+    <link href="static/css/modern-business.css" rel="stylesheet">
+    <style>
+        .text-stroke {
+            color: white;
+            text-shadow: -1px -1px 0 #000,
+            1px -1px 0 #000,
+            -1px 1px 0 #000,
+            1px 1px 0 #000;
+        }
+    </style>
+</head>
+
+<body>
+<!-- Navigation -->
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">Be a good parents</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="about.html">API Document</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<!-- Page Content -->
+<div class="container">
+
+    <!-- Page Heading/Breadcrumbs -->
+    <h1 class="mt-4 mb-3">검색 API
+    </h1>
+
+    <div class="row">
+        <div class="col-lg-12 my-4">
+            <h4>요청 URL</h4>
+            <div class="modal fade" id="city_code_modal" tabindex="-1" role="dialog" aria-labelledby="hospital_level_model" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="city_code_modal_title">도시 코드</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <ul>
+                        <li>가평군: 1</li>
+                        <li>고양시: 2</li>
+                        <li>과천시: 3</li>
+                        <li>광명시: 4</li>
+                        <li>광주시: 5</li>
+                        <li>구리시: 6</li>
+                        <li>군포시: 7</li>
+                        <li>김포시: 8</li>
+                        <li>남양주시: 9</li>
+                        <li>동두천시: 10</li>
+                        <li>부천시: 11</li>
+                        <li>성남시: 12</li>
+                        <li>수원시: 13</li>
+                        <li>시흥시: 14</li>
+                        <li>안산시: 15</li>
+                        <li>안성시: 16</li>
+                        <li>안양시: 17</li>
+                        <li>양주시: 18</li>
+                        <li>양평군: 19</li>
+                        <li>여주시: 20</li>
+                        <li>연천군: 21</li>
+                        <li>오산시: 22</li>
+                        <li>용인시: 23</li>
+                        <li>의왕시: 24</li>
+                        <li>의정부시: 25</li>
+                        <li>이천시: 26</li>
+                        <li>파주시: 27</li>
+                        <li>평택시: 28</li>
+                        <li>포천시: 29</li>
+                        <li>하남시: 30</li>
+                        <li>화성시: 31</li>
+                    </ul>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+                <p class="lead" style="font-weight:400;">
+                    URL : http://127.0.0.1:5000/search/{city_code}
+                </p>
+            </div>
+            <h4>요청 형식</h4>
+            <table class="table">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">항목명</th>
+                    <th scope="col">항목구분</th>
+                    <th scope="col">항목설명</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>city_code</td>
+                    <td>필수</td>
+                    <td>검색하고자 하는 위치의 <a href="#" data-toggle="modal" data-target="#city_code_modal">도시 코드</a>입니다. ex) 12(성남시), 2(고양시)</td>
+                </tr>
+                </tbody>
+            </table>
+            <h4>응답 형식</h4>
+            <table class="table">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">항목명</th>
+                    <th scope="col">항목구분</th>
+                    <th scope="col">항목설명</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>kinder_data</td>
+                    <td>필수</td>
+                    <td>유치원 데이터</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>festival_data</td>
+                    <td>필수</td>
+                    <td>축제/행사 데이터</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>hospital_data</td>
+                    <td>필수</td>
+                    <td>병원 데이터</td>
+                </tr>
+                </tbody>
+            </table>
+            <form role="form">
+                <div class="form-group">
+                    <label for="festival_input">도시 코드</label>
+                    <input type="number" id="search_city_input" class="form-control">
+                    <small class="form-text form-muted">도시코드를 번호를 입력해주세요.</small>
+                </div>
+                <div class="form-group">
+                    <textarea id="search_output" class="form-control" rows="10" readonly="true"></textarea>
+                    <button class="btn btn-primary btn-block" type="button" onclick="getSearchInfo()">API 모의 요청 및 결과
+                        확인
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="py-5 bg-dark">
+    <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2020</p>
+    </div>
+    <!-- /.container -->
+</footer>
+
+<!-- Bootstrap core JavaScript -->
+<script src="https:ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script type="text/javascript" src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    function getSearchInfo() {
+        searchCityCode = document.getElementById('search_city_input').value
+        var url = 'http://127.0.0.1:5000/search'
+        if (searchCityCode!= ""){
+            url = url + '/'  + String(searchCityCode)
+        }
+
+        fetch(url)
+            .then(response => response.text())
+            .then((data) => {
+                document.getElementById('search_output').value = data
+            })
+    }
+</script>
+</body>
+
+</html>
