@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, render_template
-import hospital, festivalInfo, kinderInfo
+import search, hospital, festivalInfo, kinderInfo
 import requests, json, re
 from CityCode import CityCode
 from Response import Response
@@ -18,6 +18,18 @@ def about():
     return render_template('about.html')
 
 
+@app.route('/search/<city>', methods=['GET'])
+def search_request(city):
+    if int(city) <= 0 or int(city) >= 32:
+        return search.getErrorSearch()
+    return search.getSearch(city)
+
+
+@app.route('/search.html')
+def search_doc():
+    return render_template('search.html')
+
+
 @app.route('/services.html')
 def service():
     return render_template('services.html')
@@ -29,10 +41,11 @@ def get_children(city):
         return kinderInfo.getErrorChildren()
     return kinderInfo.getChildren(city)
 
-
+  
 @app.route('/children/<city>/<page>', methods=['GET'])
 def get_children_page(city, page):
     return kinderInfo.getChildrenPage(city, page)
+
 
 @app.route('/children_doc.html')
 def children_doc():
