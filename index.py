@@ -41,7 +41,7 @@ def get_children(city):
         return kinderInfo.getErrorChildren()
     return kinderInfo.getChildren(city)
 
-
+  
 @app.route('/children/<city>/<page>', methods=['GET'])
 def get_children_page(city, page):
     return kinderInfo.getChildrenPage(city, page)
