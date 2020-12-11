@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, render_template
-import hospital, festivalInfo, kinderInfo
+import search, hospital, festivalInfo, kinderInfo
 import requests, json, re
 from CityCode import CityCode
 from Response import Response
@@ -18,15 +18,16 @@ def about():
     return render_template('about.html')
 
 
+@app.route('/search/<city>', methods=['GET'])
+def search_request(city):
+    if int(city) <= 0 or int(city) >= 32:
+        return search.getErrorSearch()
+    return search.getSearch(city)
+
+
 @app.route('/search.html')
-def total():
+def search_doc():
     return render_template('search.html')
-
-
-#@app.route('/team_five.html/<city>')
-@app.route('/team_five.html', methods=['GET'])
-def team_five():
-    return render_template('team_five.html')
 
 
 @app.route('/services.html')
@@ -44,6 +45,7 @@ def get_children(city):
 @app.route('/children/<city>/<page>', methods=['GET'])
 def get_children_page(city, page):
     return kinderInfo.getChildrenPage(city, page)
+
 
 @app.route('/children_doc.html')
 def children_doc():
@@ -105,6 +107,18 @@ def hospital_request_all_address_limit(major, minor, item_count):
             response = Response(39)
             return json.dumps(response.getResponse(), ensure_ascii=False, indent=4)
     return hospital.response_all_hospital_info_address(major, minor, item_count)
+
+
+@app.route('/hospital/<code>/', methods=['GET'])
+def hospital_request_simple(code):
+    city_code = CityCode()
+    if code.isdigit():
+        city_name = city_code.get_name(code)
+        if city_name != "-":
+            return hospital.response_all_hospital_info_address("경기도", city_name, 10)
+    
+    response = Response(39)
+    return json.dumps(response.getResponse(), ensure_ascii=False, indent=4)
 
 
 @app.route('/hospital/demo')
