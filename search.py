@@ -17,8 +17,24 @@ def getSearch(city):
     dictA = json.loads(jsonStringA)
     dictB = json.loads(jsonStringB)
     dictC = json.loads(jsonStringC)
-
     merged_dict = {}
+
+    if dictA['header']['resultCode'] == '10':
+        response = Response.Response(10)
+        response = response.getResponse()
+        jsonVal = json.dumps(response, ensure_ascii=False, indent=4)
+        return jsonVal
+    if dictB['header']['resultCode'] == '20':
+        response = Response.Response(20)
+        response = response.getResponse()
+        jsonVal = json.dumps(response, ensure_ascii=False, indent=4)
+        return jsonVal
+    if dictC['header']['resultCode'] == '30':
+        response = Response.Response(30)
+        response = response.getResponse()
+        jsonVal = json.dumps(response, ensure_ascii=False, indent=4)
+        return jsonVal
+
     merged_dict['kinder'] = dictA["body"]
     merged_dict['festival'] = dictB["body"]
     merged_dict['hospital'] = dictC["body"]

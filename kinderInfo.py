@@ -22,6 +22,12 @@ def getChildren(cityCode):
 
     res = requests.get(host, params=para).json()
 
+    if res['status'] == 'DENIED':
+        response = Response.Response(10)
+        response = response.getResponse()
+        jsonVal = json.dumps(response, ensure_ascii=False, indent=4)
+        return jsonVal
+
     list = []
     kinder = res['kinderInfo']
     totalCnt = kinder[-1]['key']
