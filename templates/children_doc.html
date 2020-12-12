@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>좋은 부모가 되기 위한 API - Be A Good Parents</title>
+    <title>유치원 정보 찾기 - API Document</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="/static/vendor/bootstrap/css/bootstrap.css">
@@ -23,14 +23,26 @@
             -1px 1px 0 #000,
             1px 1px 0 #000;
         }
+
+                tr:hover {
+            background-color:rgba(18, 145, 255, 0.2);
+        }
+
+
+
+
+
+
+
+
     </style>
 </head>
 
 <body>
 <!-- Navigation -->
-<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-        <a class="navbar-brand" href="index.html">Be a good parents</a>
+        <a class="navbar-brand" href="index.html">Kindergarten API Document</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -39,7 +51,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="about.html">API Document</a>
+                    <a class="nav-link" href="/index.html">Main Page</a>
                 </li>
             </ul>
         </div>
@@ -51,87 +63,205 @@
 <div class="container">
 
     <!-- Page Heading/Breadcrumbs -->
-    <h1 class="mt-4 mb-3">유치원 API 상세정보</h1>
+    <h1 class="mt-4 mb-3">유치원 API 호출 문서</h1>
+    <hr>
+    <div class="mt-3 mb-4">
+        <p>
+            유치원알리미의 <a href="https://e-childschoolinfo.moe.go.kr/openData.do" target="_blank">공공 데이터 오픈 API</a>를
+            활용하여 얻은 경기도의 병원 정보를 간략화하여 Json으로 제공합니다.
+        </p>
+    </div>
+    <hr class="mt-4">
+    <div class="mt-3 mb-2">
+        <select id="document_selector" class="form-control" onchange="directToOtherDocument()">
+            <option name="Hospital" value="/hospital/doc">정제된 병원 API 호출 문서</option>
+            <option name="Kindergarten" value="#" selected>유치원 API 호출 문서</option>
+            <option name="Festival" value="/services.html">축제, 행사 API 호출 문서</option>
+            <option value="#" disabled>--------------</option>
+            <option name="Search" value="/search.html">통합 API 호출 문서</option>
+        </select>
+    </div>
+
 
     <div class="row">
-        <div class="col-lg-12 my-4">
-            <h4>요청 URL</h4>
-            <ht>URL : http://127.0.0.1:5000/children/{cityCode}</ht>
-            <h4>요청 형식</h4>
-            <table class="table">
-                <thead class="thead-light">
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">항목명</th>
-                    <th scope="col">항목구분</th>
-                    <th scope="col">항목설명</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>cityCode</td>
-                    <td>필수</td>
-                    <td>도시 코드</td>
-                </tr>
-                </tbody>
-            </table>
-            <h4>응답 형식</h4>
-            <table class="table">
-                <thead class="thead-light">
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">항목명</th>
-                    <th scope="col">항목구분</th>
-                    <th scope="col">항목설명</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>title</td>
-                    <td>필수</td>
-                    <td>유치원 이름</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>overview</td>
-                    <td>필수</td>
-                    <td>유치원 주소</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>telNo</td>
-                    <td>필수</td>
-                    <td>연락처</td>
-                </tr>
-                <tr>
-                    <th scope="row">4</th>
-                    <td>hpAddr</td>
-                    <td>선택</td>
-                    <td>홈페이지 주소</td>
-                </tr>
-                <tr>
-                    <th scope="row">5</th>
-                    <td>childNo</td>
-                    <td>필수</td>
-                    <td>총 유아 수</td>
-                </tr>
-                </tbody>
-            </table>
-            <form role="form">
-                <div class="form-group">
-                    <label for="festival_input">도시 코드</label>
-                    <input type="number" id="children_input1" class="form-control">
-                    <small class="form-text form-muted">도시코드를 입력해주세요.</small>
+        <div class="col-lg-12 my-2">
+
+
+            <div class="mt-2 mb-3">
+                <button class="btn btn-outline-dark btn-block" onclick="toggleElementVisibility('request_url_div')">
+                    <h4 class="text-left">요청 URL</h4>
+                </button>
+
+                <div id="request_url_div" class="pt-2 pb-2">
+                    <button class="btn btn-primary btn-sm ml-1 mr-2">GET</button>
+                    <p class="text-justify" style="display:inline;">
+                        /children/&lt;city_code&gt;
+                    </p>
+
                 </div>
-                <div class="form-group">
-                    <textarea id="children_output" class="form-control" rows="10" readonly="true"></textarea>
-                    <button class="btn btn-primary btn-block" type="button" onclick="getChildrenInfo()">API 모의 요청 및 결과
-                        확인
-                    </button>
+            </div>
+
+
+            <div class="modal fade" id="city_code_modal" tabindex="-1" role="dialog"
+                 aria-labelledby="hospital_level_model" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="city_code_modal_title">도시 코드</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <ul>
+                                <li>가평군: 1</li>
+                                <li>고양시: 2</li>
+                                <li>과천시: 3</li>
+                                <li>광명시: 4</li>
+                                <li>광주시: 5</li>
+                                <li>구리시: 6</li>
+                                <li>군포시: 7</li>
+                                <li>김포시: 8</li>
+                                <li>남양주시: 9</li>
+                                <li>동두천시: 10</li>
+                                <li>부천시: 11</li>
+                                <li>성남시: 12</li>
+                                <li>수원시: 13</li>
+                                <li>시흥시: 14</li>
+                                <li>안산시: 15</li>
+                                <li>안성시: 16</li>
+                                <li>안양시: 17</li>
+                                <li>양주시: 18</li>
+                                <li>양평군: 19</li>
+                                <li>여주시: 20</li>
+                                <li>연천군: 21</li>
+                                <li>오산시: 22</li>
+                                <li>용인시: 23</li>
+                                <li>의왕시: 24</li>
+                                <li>의정부시: 25</li>
+                                <li>이천시: 26</li>
+                                <li>파주시: 27</li>
+                                <li>평택시: 28</li>
+                                <li>포천시: 29</li>
+                                <li>하남시: 30</li>
+                                <li>화성시: 31</li>
+                            </ul>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                        </div>
+                    </div>
                 </div>
-            </form>
+            </div>
+            <div class="mt-2 mb-3">
+                <button class="btn btn-outline-dark btn-block" onclick="toggleElementVisibility('request_format_div')">
+                    <h4 class="text-left">요청 형식</h4>
+                </button>
+
+                <div id="request_format_div" class="pt-2 pb-2">
+                    <table class="table ml-1 mr-2">
+                        <thead class="thead-light">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">항목명</th>
+                            <th scope="col">항목구분</th>
+                            <th scope="col">항목설명</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>city_code</td>
+                            <td>필수</td>
+                            <td>병원을 검색하고자 하는 위치의 시군구의 <a href="#" data-toggle="modal"
+                                                         data-target="#city_code_modal">코드</a>입니다.
+                                ex) 12(성남시), 2(고양시)
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+            <div class="mt-2 mb-3">
+                <button class="btn btn-outline-dark btn-block" onclick="toggleElementVisibility('response_format_div')">
+                    <h4 class="text-left">응답 형식</h4>
+                </button>
+
+                <div id="response_format_div" class="pt-2 pb-2">
+                    <table class="table">
+                        <thead class="thead-light">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">항목명</th>
+                            <th scope="col">항목구분</th>
+                            <th scope="col">항목설명</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>title</td>
+                            <td>필수</td>
+                            <td>유치원 이름</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>overview</td>
+                            <td>필수</td>
+                            <td>유치원 주소</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>telNo</td>
+                            <td>필수</td>
+                            <td>연락처</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">4</th>
+                            <td>hpAddr</td>
+                            <td>선택</td>
+                            <td>홈페이지 주소</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">5</th>
+                            <td>childNo</td>
+                            <td>필수</td>
+                            <td>총 유아 수</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+            <div class="mt-2 mb-3">
+                <button class="btn btn-outline-dark btn-block" onclick="toggleElementVisibility('api_test_div')">
+                    <h4 class="text-left">API 모의 요청 수행</h4>
+                </button>
+                <div id="api_test_div" class="form-group pt-2 pb-2">
+                    <form role="form">
+
+                        <div class="form-group">
+                            <label for="kindergarten_input_city_code">시군구 코드</label>
+                            <input type="text" id="kindergarten_input_city_code" class="form-control" placeholder="시군구"
+                                   value="1">
+                            <small class="form-text text-muted">유치원 탐색을 위한 시군구 코드를 입력해주세요.</small>
+                        </div>
+
+                        <div class="form-group">
+                            <textarea class="form-control" id="kindergarten_output" rows="10"
+                                      readonly="readonly"></textarea>
+                            <button class="btn btn-primary btn-block" type="button" onclick="getKindergartenInfo()">API
+                                모의
+                                요청 및
+                                결과 확인
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -148,24 +278,45 @@
 <script src="https:ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script type="text/javascript" src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript">
-    function getChildrenInfo() {
-        childrenCityCode = document.getElementById('children_input1').value
+    function getKindergartenInfo() {
+        //childrenCityCode = document.getElementById('children_input1').value
         //childrenPageNum = document.getElementById('children_input2').value
+        city_code = document.getElementById('kindergarten_input_city_code').value
 
-        if (childrenCityCode == ""){
-            var url = 'http://127.0.0.1:5000/children'
+        if (city_code == ""){
+            var url = '/children'
         } else{
-            var url = 'http://127.0.0.1:5000/children/' + String(childrenCityCode)
+            var url = '/children/' + String(city_code)
         }
 
         console.log(url)
         fetch(url)
             .then(response => response.text())
             .then((data) => {
-                document.getElementById('children_output').value = data
+                document.getElementById('kindergarten_output').value = data
                 console.log(data)
             })
     }
+
+
+    function toggleElementVisibility(element_name){
+        var item = document.getElementById(element_name)
+        if(item != null){
+            item.classList.contains("d-none") == true ? item.classList.remove("d-none") : item.classList.add("d-none")
+        }
+    }
+
+
+    function directToOtherDocument() {
+        var select = document.getElementById("document_selector");
+        var selectedValue = select.options[select.selectedIndex].value;
+        document.location = selectedValue;
+    }
+
+
+
+
+
 </script>
 </body>
 
