@@ -23,7 +23,7 @@
         .back_img {
             width: 100vw;
             height: 100vh;
-            background-image: url("https://drive.google.com/uc?export=view&id=1C4Tze4vbD6KkUht9l2glJXxpcRzT5g37");
+            background-image: url({{ url_for('static', filename="image/back_img.png") }});
         }
     </style>
 
@@ -114,7 +114,6 @@
                             <h4 class="card-title">검색 API</h4>
                             <p class="card-text">경기도에 위치하는 소아전문센터/축제/행사/유치원 정보를 제공하고 있습니다.</p>
                             <a href="search.html" class="btn btn-primary">API 문서</a>
-                            <a href="team_five.html" class="btn btn-info">예시</a>
                         </div>
                     </div>
                 </div>
@@ -137,45 +136,7 @@
 <script src="https:ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script type="text/javascript" src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript">
-    function getFestivalInfo() {
-        festivalPageNum = document.getElementById('festival_input').value
-        festivalCityCode = document.getElementById('festival_city_input').value
-        console.log(festivalPageNum)
-        var url = 'http://127.0.0.1:5000/festival/' + String(festivalPageNum) + "/" + String(festivalCityCode)
-        console.log(url)
-        fetch(url)
-            .then(response => response.text())
-            .then((data) => {
-                document.getElementById('festival_output').value = data
-                console.log(data)
-            })
-    }
 
-    function getHospitalInfo() {
-        major = document.getElementById('hospital_input_major_address').value
-        minor = document.getElementById('hospital_input_minor_address').value
-
-        hospitalInfoRequestURL = '/hospital/request/address/' + major + '/' + minor
-
-        fetch(hospitalInfoRequestURL).then(response => response.text()).then((data) => {
-            document.getElementById('hospital_output').value = data
-            console.log("job done")
-        })
-    }
-
-    function getChildrenInfo() {
-        childrenPageNum = document.getElementById('children_input1').value
-        console.log(childrenPageNum)
-        var url = 'http://127.0.0.1:5000/children/' + String(childrenPageNum)
-        console.log(url)
-        fetch(url)
-            .then(response => response.text())
-            .then((data) => {
-                document.getElementById('children_output').value = data
-                console.log(data)
-            })
-
-    }
 </script>
 
 </body>
